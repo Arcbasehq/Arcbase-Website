@@ -1,6 +1,6 @@
 # Convex Setup Guide
 
-This guide will walk you through setting up authentication for the Criminas website using Convex.
+This guide will walk you through setting up authentication for the arcbase website using Convex.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ This guide will walk you through setting up authentication for the Criminas webs
 2. Click "New OAuth App"
 
 3. Fill in the details:
-   - **Application name**: Criminas
+   - **Application name**: arcbase
    - **Homepage URL**: `http://localhost:4321` (for development)
    - **Authorization callback URL**: Get this from your Convex dashboard under "Authentication" settings
      - It will look like: `https://YOUR_DEPLOYMENT.convex.site/api/auth/callback/github`
@@ -67,7 +67,7 @@ This guide will walk you through setting up authentication for the Criminas webs
    - Go to "APIs & Services" > "Credentials"
    - Click "Create Credentials" > "OAuth client ID"
    - Application type: "Web application"
-   - Name: "Criminas"
+   - Name: "arcbase"
    - Authorized redirect URIs:
      - Get this from your Convex dashboard under "Authentication" settings
      - It will look like: `https://YOUR_DEPLOYMENT.convex.site/api/auth/callback/google`

@@ -1,8 +1,8 @@
-# Criminas
+# arcbase
 
 Empowering everyone to change their world, by bringing open source software to the masses.
 
-Criminas is a collection of open-source projects focused on developer tools, cloud infrastructure, and security.
+arcbase is a collection of open-source projects focused on developer tools, cloud infrastructure, and security.
 
 ## Projects
 
@@ -56,4 +56,4 @@ This project is open-source. See individual projects for specific licensing deta
 
 ## Contact
 
-Questions? Reach out to us at [hello@criminas.org](mailto:hello@criminas.org) or visit our [Contact page](https://criminas.org/contact).
+Questions? Reach out to us at [hello@arcbase.one](mailto:hello@arcbase.one) or visit our [Contact page](https://arcbase.one/contact).

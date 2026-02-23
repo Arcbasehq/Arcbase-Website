@@ -1,8 +1,8 @@
-# Contributing to Criminas
+# Contributing to arcbase
 
-First off, thank you for considering contributing to Criminas! We are a community-driven organization building open source tools for a freer, more secure web. Your contributions help make that vision a reality.
+First off, thank you for considering contributing to arcbase! We are a community-driven organization building open source tools for a freer, more secure web. Your contributions help make that vision a reality.
 
-This guide applies to all repositories under the Criminas organization, including our website, CLI tools, core infrastructure, and security projects.
+This guide applies to all repositories under the arcbase organization, including our website, CLI tools, core infrastructure, and security projects.
 
 ## Code of Conduct
 
@@ -20,7 +20,7 @@ If you find a bug, please search the project's issue tracker first. If it's a ne
 - Environment details (OS, version, etc.)
 
 > [!IMPORTANT]
-> **Security Vulnerabilities**: Please do not report security vulnerabilities via public issues. Instead, email us directly at [security@criminas.org](mailto:security@criminas.org).
+> **Security Vulnerabilities**: Please do not report security vulnerabilities via public issues. Instead, email us directly at [security@arcbase.one](mailto:security@arcbase.one).
 
 ### Feature Requests
 
@@ -45,7 +45,7 @@ Good documentation is as important as good code. We welcome improvements to our 
 
 ## Development Ecosystem
 
-Criminas uses a variety of technologies depending on the project's goals:
+arcbase uses a variety of technologies depending on the project's goals:
 
 - **Web**: Astro, TypeScript, Vanilla CSS
 - **Core Systems**: Go, Rust, C++
@@ -67,7 +67,7 @@ Since each project has its own environment, please always refer to the `README.m
 
 Join the conversation and stay updated:
 
-- **GitHub**: [github.com/criminas](https://github.com/criminas)
-- **Email**: [hello@criminas.org](mailto:hello@criminas.org)
+- **GitHub**: [github.com/arcbase](https://github.com/arcbase)
+- **Email**: [hello@arcbase.one](mailto:hello@arcbase.one)
 
-Thank you for being part of Criminas!
+Thank you for being part of arcbase!

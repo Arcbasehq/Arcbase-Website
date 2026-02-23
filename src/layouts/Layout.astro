@@ -21,14 +21,14 @@ const {
     canonicalUrl = Astro.url.href,
     ogImage = "/logo.png",
     ogType = "website",
-    keywords = "open source, linux, software, community, Criminas, developer tools",
-    author = "Criminas",
+    keywords = "open source, linux, software, community, arcbase, developer tools",
+    author = "arcbase",
     activePage = "",
     noIndex = false,
 } = Astro.props;
 
-const siteTitle = title.includes("Criminas") ? title : `${title} — Criminas`;
-const siteUrl = "https://criminas.org";
+const siteTitle = title.includes("arcbase") ? title : `${title} — arcbase`;
+const siteUrl = "https://arcbase.one";
 ---
 
 <html lang="en">
@@ -52,7 +52,7 @@ const siteUrl = "https://criminas.org";
         <meta property="og:title" content={siteTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={`${siteUrl}${ogImage}`} />
-        <meta property="og:site_name" content="Criminas" />
+        <meta property="og:site_name" content="arcbase" />
         <meta property="og:locale" content="en_US" />
 
         <!-- Twitter Card -->
@@ -63,7 +63,7 @@ const siteUrl = "https://criminas.org";
 
         <!-- Additional SEO -->
         <meta name="theme-color" content="#ffffff" />
-        <meta name="apple-mobile-web-app-title" content="Criminas" />
+        <meta name="apple-mobile-web-app-title" content="arcbase" />
         <link rel="apple-touch-icon" href="/logo.png" />
 
         <!-- Dark Mode Script (prevent flash) -->
@@ -82,15 +82,15 @@ const siteUrl = "https://criminas.org";
             set:html={JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                name: "Criminas",
+                name: "arcbase",
                 url: siteUrl,
                 logo: `${siteUrl}/logo.png`,
                 description:
                     "Empowering everyone to change their world, by bringing open source software to the masses.",
-                sameAs: ["https://github.com/criminas"],
+                sameAs: ["https://github.com/arcbase"],
                 contactPoint: {
                     "@type": "ContactPoint",
-                    email: "hello@criminas.org",
+                    email: "hello@arcbase.one",
                     contactType: "customer support",
                 },
             })}
@@ -104,8 +104,8 @@ const siteUrl = "https://criminas.org";
             id="navbar"
         >
             <a href="/" class="nav-brand">
-                <img src="/logo.png" alt="Criminas Logo" />
-                <span>Criminas</span>
+                <img src="/logo.png" alt="arcbase Logo" />
+                <span>Arcbase</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li>
@@ -131,7 +131,7 @@ const siteUrl = "https://criminas.org";
                 </li>
                 <li>
                     <a
-                        href="https://github.com/criminas"
+                        href="https://github.com/arcbase"
                         target="_blank"
                         rel="noopener noreferrer"
                         >GitHub</a
@@ -185,12 +185,12 @@ const siteUrl = "https://criminas.org";
                     <a href="/" class="nav-brand">
                         <img
                             src="/logo.png"
-                            alt="Criminas"
+                            alt="arcbase"
                             style="height: 32px;"
                         />
                         <span
                             style="color: #fff; font-weight: 700; font-size: 1.15rem;"
-                            >Criminas</span
+                            >arcbase</span
                         >
                     </a>
                     <p>
@@ -201,12 +201,12 @@ const siteUrl = "https://criminas.org";
                 <div class="footer-col">
                     <h4>Projects</h4>
                     <a href="/projects/sentinel">Sentinel</a>
-                    <a href="/projects/app">Criminas Learning</a>
+                    <a href="/projects/app">Arcbase Learning</a>
                 </div>
                 <div class="footer-col">
                     <h4>Community</h4>
                     <a
-                        href="https://github.com/criminas"
+                        href="https://github.com/arcbase"
                         target="_blank"
                         rel="noopener">GitHub</a
                     >
@@ -220,10 +220,10 @@ const siteUrl = "https://criminas.org";
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Criminas. All rights reserved.</p>
+                <p>&copy; 2026 arcbase. All rights reserved.</p>
                 <div class="footer-socials">
                     <a
-                        href="https://github.com/criminas"
+                        href="https://github.com/arcbase"
                         target="_blank"
                         rel="noopener"
                         aria-label="GitHub"
