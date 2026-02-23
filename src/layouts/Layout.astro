@@ -200,10 +200,8 @@ const siteUrl = "https://criminas.org";
                 </div>
                 <div class="footer-col">
                     <h4>Projects</h4>
-                    <a href="/projects/crimirepo">CrimiRepo</a>
-                    <a href="/projects/forge">Forge</a>
-                    <a href="/projects/nexus">Nexus</a>
                     <a href="/projects/sentinel">Sentinel</a>
+                    <a href="/projects/app">Criminas Learning</a>
                 </div>
                 <div class="footer-col">
                     <h4>Community</h4>
@@ -295,11 +293,11 @@ const siteUrl = "https://criminas.org";
             // ===== DARK MODE TOGGLE =====
             const themeToggle = document.getElementById("themeToggle");
             const html = document.documentElement;
-            
+
             // Check for saved theme preference or default to light mode
             const currentTheme = localStorage.getItem("theme") || "light";
             html.setAttribute("data-theme", currentTheme);
-            
+
             themeToggle?.addEventListener("click", () => {
                 const theme = html.getAttribute("data-theme") === "light" ? "dark" : "light";
                 html.setAttribute("data-theme", theme);

@@ -4,60 +4,6 @@ import StarButton from "../components/StarButton.astro";
 
 const projects = [
     {
-        name: "CrimiRepo",
-        slug: "crimirepo",
-        tagline: "The community-driven package repository.",
-        description:
-            "CrimiRepo is a modern package repository designed to make software distribution simple. With community-maintained packages and automated build pipelines, everyone can contribute.",
-        tag: "Package Management",
-        tagColor: "#3b82f6",
-        tagBg: "rgba(59, 130, 246, 0.1)",
-        headerBg: "linear-gradient(135deg, #0f172a, #1e3a5f)",
-        inDev: true,
-        features: [
-            "Community-maintained packages",
-            "Automated build & testing pipelines",
-            "Easy contribution workflow",
-            "Version management & rollbacks",
-        ],
-    },
-    {
-        name: "Forge",
-        slug: "forge",
-        tagline: "Developer tools that accelerate your workflow.",
-        description:
-            "Forge is a suite of modern developer tools built to streamline your development process. From scaffolding to deployment, Forge handles the heavy lifting so you can focus on building.",
-        tag: "Developer Tools",
-        tagColor: "#1a1a2e",
-        tagBg: "rgba(26, 26, 46, 0.06)",
-        headerBg: "linear-gradient(135deg, #f0eef6, #e8e6f0)",
-        inDev: true,
-        features: [
-            "Project scaffolding & templates",
-            "Integrated build system",
-            "Hot module replacement",
-            "Plugin ecosystem",
-        ],
-    },
-    {
-        name: "Nexus",
-        slug: "nexus",
-        tagline: "Cloud infrastructure that just works.",
-        description:
-            "Deploy anything, anywhere with Nexus. Our open source cloud platform provides simple, powerful infrastructure that scales with your needs — from side projects to production workloads.",
-        tag: "Cloud Platform",
-        tagColor: "#7c3aed",
-        tagBg: "rgba(124, 58, 237, 0.1)",
-        headerBg: "linear-gradient(135deg, #312e81, #4c1d95)",
-        inDev: true,
-        features: [
-            "One-click deployments",
-            "Auto-scaling infrastructure",
-            "Built-in monitoring & logging",
-            "Edge network distribution",
-        ],
-    },
-    {
         name: "Sentinel",
         slug: "sentinel",
         tagline: "Open source security for the modern web.",
@@ -183,8 +129,8 @@ const projects = [
                                         ))}
                                     </ul>
                                     <div style="margin-top: 1.5rem;">
-                                        <StarButton 
-                                            projectId={project.slug} 
+                                        <StarButton
+                                            projectId={project.slug}
                                             projectName={project.name}
                                         />
                                     </div>

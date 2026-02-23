@@ -11,11 +11,10 @@ import Layout from "../../layouts/Layout.astro";
 >
     <!-- PROJECT HERO -->
     <section class="project-hero">
-        <div class="hero-glow glow-1"></div>
-        <div class="hero-glow glow-2"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
         <div class="project-hero-content fade-up">
             <div class="project-title-group">
-                <span class="project-tag">Android Only</span>
                 <h1>Criminas <span class="highlight">Learning</span></h1>
             </div>
             <p class="project-subtitle">
@@ -25,20 +24,10 @@ import Layout from "../../layouts/Layout.astro";
             </p>
             <div class="project-actions">
                 <a href="#" class="btn-primary">
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        style="margin-right: 8px;"
-                        ><path
-                            d="M17.523 15.3414C17.523 15.3414 17.5023 15.3438 17.5023 15.3344C17.5023 15.3344 17.5188 15.3367 17.523 15.3414ZM3.81229 15.3344C3.81229 15.3344 3.79157 15.332 3.79157 15.3414C3.79583 15.339 3.81229 15.3344 3.81229 15.3344ZM12.0001 2.30158L10.9702 0.501584C10.8711 0.334084 10.6559 0.278303 10.4856 0.375803C10.3154 0.473303 10.2573 0.690178 10.3565 0.860021L11.4449 2.76002C9.40898 3.70252 7.84226 5.37674 7.08507 7.42767C7.03961 7.55189 7.00032 7.67806 6.96515 7.80634C6.91136 8.01923 6.86584 8.23627 6.83274 8.45533C6.73552 9.07345 6.69623 9.70423 6.69623 10.3478C6.69623 10.4573 6.69416 10.5647 6.6983 10.6722C6.72106 11.2325 6.78313 11.7825 6.88449 12.3222C6.93828 12.6034 7.00652 12.8764 7.08507 13.1431C7.84226 15.1941 9.40898 16.8683 11.4449 17.8108L10.3565 19.7108C10.2573 19.8806 10.3154 20.0975 10.4856 20.195C10.6559 20.2925 10.8711 20.2367 10.9702 20.0692L12.0001 18.2692L13.0299 20.0692C13.129 20.2367 13.3443 20.2925 13.5145 20.195C13.6848 20.0975 13.7429 19.8806 13.6437 19.7108L12.5553 17.8108C14.5912 16.8683 16.1579 15.1941 16.9151 13.1431C16.9937 12.8764 17.0619 12.6034 17.1157 12.3222C17.217 11.7825 17.2791 11.2325 17.3019 10.6722C17.306 10.5647 17.304 10.4573 17.304 10.3478C17.304 9.70423 17.2647 9.07345 17.1674 8.45533C17.1343 8.23627 17.0888 8.01923 17.035 7.80634C16.9999 7.67806 16.9606 7.55189 16.9151 7.42767C16.1579 5.37674 14.5912 3.70252 12.5553 2.76002L13.6437 0.860021C13.7429 0.690178 13.6848 0.473303 13.5145 0.375803C13.3443 0.278303 13.129 0.334084 13.0299 0.501584L12.0001 2.30158Z"
-                        ></path></svg
-                    >
                     Get on Play Store
                 </a>
                 <a
-                    href="https://github.com/criminas/learning-android"
+                    href="https://github.com/criminas/criminasapp" target="_blank"
                     class="btn-secondary"
                 >
                     Source Code
@@ -119,7 +108,7 @@ import Layout from "../../layouts/Layout.astro";
     </section>
 
     <!-- UI PREVIEW -->
-    <section class="section alt-bg">
+    <section class="section">
         <div class="section-container">
             <div class="preview-layout">
                 <div class="preview-text fade-up">
@@ -430,9 +419,9 @@ import Layout from "../../layouts/Layout.astro";
         .project-hero {
             padding: 10rem 2rem 6rem;
             position: relative;
-            background: linear-gradient(135deg, #064e3b, #065f46);
             overflow: hidden;
             text-align: center;
+            border-bottom: 2px solid #222222;
         }
 
         .project-hero-content {
@@ -491,11 +480,9 @@ import Layout from "../../layouts/Layout.astro";
         }
 
         .feature-card {
-            background: #fff;
+            background: #333333;
             padding: 2.5rem;
             border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e5e7eb;
             transition: transform 0.2s ease;
         }
 
@@ -529,11 +516,11 @@ import Layout from "../../layouts/Layout.astro";
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
-            color: #1f2937;
+            color: lightgrey;
         }
 
         .feature-card p {
-            color: #6b7280;
+            color: lightgrey;
             line-height: 1.6;
         }
 
@@ -560,7 +547,7 @@ import Layout from "../../layouts/Layout.astro";
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1rem;
-            color: #4b5563;
+            color: white;
         }
 
         .preview-list li::before {
@@ -574,7 +561,7 @@ import Layout from "../../layouts/Layout.astro";
             height: 840px;
             background: #f1f5f9;
             border-radius: 46px;
-            border: 14px solid #e2e8f0;
+            border: 14px solid #222222;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
