@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://criminas.org',
+    site: 'https://arcbase.one',
     integrations: [sitemap()],
 });
 
