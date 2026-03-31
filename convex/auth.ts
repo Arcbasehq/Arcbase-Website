@@ -13,11 +13,37 @@ export const { auth, signIn, signOut, store } = convexAuth({
   ],
   callbacks: {
     async redirect({ redirectTo }) {
-      if (redirectTo.includes(".vercel.app/")) {
+      if (
+        typeof redirectTo === "string" &&
+        redirectTo.includes(".vercel.app/")
+      ) {
         return redirectTo;
       }
 
-      const baseUrl = process.env.SITE_URL!.replace(/\/$/, "");
+      const siteEnv =
+        process.env.SITE_URL ||
+        process.env.NEXT_PUBLIC_SITE_URL ||
+        (process.env.VERCEL_URL
+          ? `https://${process.env.VERCEL_URL}`
+          : undefined);
+
+      if (!siteEnv) {
+        if (!redirectTo || redirectTo === "/") return "/";
+        if (
+          redirectTo.startsWith("http://") ||
+          redirectTo.startsWith("https://") ||
+          redirectTo.startsWith("?") ||
+          redirectTo.startsWith("/")
+        ) {
+          return redirectTo;
+        }
+        console.warn(
+          `No SITE_URL configured; rejecting redirectTo=${redirectTo}`,
+        );
+        return "/";
+      }
+
+      const baseUrl = siteEnv.replace(/\/$/, "");
       const wwwBaseUrl = baseUrl.replace("https://", "https://www.");
 
       if (redirectTo.startsWith("?") || redirectTo.startsWith("/")) {
@@ -27,6 +53,6 @@ export const { auth, signIn, signOut, store } = convexAuth({
         return redirectTo;
       }
       throw new Error(`Invalid redirect: ${redirectTo}`);
-    }
-  }
+    },
+  },
 });

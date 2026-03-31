@@ -224,10 +224,25 @@ import Layout from "../layouts/Layout.astro";
                 }
         } catch (error: any) {
             console.error('Login error:', error);
+
+            // Robust detection for Convex server 'InvalidAccountId' error
+            function isInvalidAccountError(e: any) {
+                try {
+                    const text = (e && (e.message || e.toString())) || '';
+                    if (typeof text === 'string' && text.includes('InvalidAccountId')) return true;
+                    // Sometimes Convex wraps errors; stringify for extra safety
+                    const json = JSON.stringify(e);
+                    return typeof json === 'string' && json.includes('InvalidAccountId');
+                } catch (_err) {
+                    return false;
+                }
+            }
+
             let message = 'Invalid email or password. Please try again.';
-            if (error.message?.includes('InvalidAccountId')) {
+            if (isInvalidAccountError(error)) {
                 message = 'Account not found. Please register first.';
             }
+
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
             submitBtn.disabled = false;
