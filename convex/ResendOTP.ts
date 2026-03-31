@@ -5,48 +5,74 @@ import { type RandomReader, generateRandomString } from "@oslojs/crypto/random";
 const resendApiKey = process.env.AUTH_RESEND_KEY ?? process.env.RESEND_API_KEY;
 
 if (!resendApiKey) {
-  throw new Error("Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.");
+  throw new Error(
+    "Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.",
+  );
 }
 
 export const ResendOTP = Resend({
   id: "resend-otp",
   apiKey: resendApiKey,
 
-    async generateVerificationToken() {
-        const random: RandomReader = {
-            read(bytes: Uint8Array) {
-                crypto.getRandomValues(bytes);
-            },
-        };
-        return generateRandomString(random, "0123456789", 6);
-    },
+  async generateVerificationToken() {
+    const random: RandomReader = {
+      read(bytes: Uint8Array) {
+        crypto.getRandomValues(bytes);
+      },
+    };
+    return generateRandomString(random, "0123456789", 6);
+  },
 
-    async sendVerificationRequest({ identifier: email, provider, token }) {
-      const apiKey = provider.apiKey ?? resendApiKey;
-      if (!apiKey) {
-        throw new Error("Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.");
+  async sendVerificationRequest({ identifier: email, provider, token }) {
+    const apiKey = provider.apiKey ?? resendApiKey;
+    if (!apiKey) {
+      throw new Error(
+        "Missing AUTH_RESEND_KEY (Resend API key). Set it in Convex env.",
+      );
+    }
+    const resend = new ResendAPI(apiKey);
+
+    // Allow overriding the "from" address via provider config or env var.
+    const fromAddress =
+      (provider as any)?.from ??
+      process.env.AUTH_RESEND_FROM ??
+      process.env.RESEND_FROM ??
+      "Arcbase <noreply@arcbase.one>";
+
+    try {
+      const result = await resend.emails.send({
+        from: fromAddress,
+        to: [email],
+        subject: `Your Arcbase verification code: ${token}`,
+        html: generateEmailHTML(token),
+      });
+
+      // The SDK may either throw on error or return an object with `error` — handle both.
+      if ((result as any)?.error) {
+        console.error("Resend API returned error:", (result as any).error);
+        throw new Error(
+          (result as any).error?.message ?? "Unknown Resend error",
+        );
       }
-      const resend = new ResendAPI(apiKey);
-        const { error } = await resend.emails.send({
-            from: "Arcbase <noreply@arcbase.one>",
-            to: [email],
-            subject: `Your Arcbase verification code: ${token}`,
-            html: generateEmailHTML(token),
-        });
-
-        if (error) {
-            console.error("Email send error:", error);
-            throw new Error("Could not send verification email");
-        }
-    },
+    } catch (err: any) {
+      console.error("Email send error:", err);
+      const errMsg = err?.message ?? String(err);
+      if (String(errMsg).toLowerCase().includes("domain is not verified")) {
+        throw new Error(
+          "Could not send verification email: your sending domain is not verified in Resend. Please add and verify your domain at https://resend.com/domains",
+        );
+      }
+      throw new Error(`Could not send verification email: ${errMsg}`);
+    }
+  },
 });
 
 function generateEmailHTML(code: string): string {
-    const digits = code.split("");
+  const digits = code.split("");
 
-    const digitBoxes = digits
-        .map(
-            (d) => `
+  const digitBoxes = digits
+    .map(
+      (d) => `
       <td style="padding: 0 4px;">
         <div style="
           width: 48px;
@@ -62,11 +88,11 @@ function generateEmailHTML(code: string): string {
           text-align: center;
         ">${d}</div>
       </td>
-    `
-        )
-        .join("");
+    `,
+    )
+    .join("");
 
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>

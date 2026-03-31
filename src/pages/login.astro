@@ -117,6 +117,8 @@ import Layout from "../layouts/Layout.astro";
                 provider: 'google',
                 params: { redirectTo: window.location.origin + '/auth/callback' }
             });
+                console.debug('Login: google signIn result keys=', result ? Object.keys(result) : null);
+                console.debug('Login: google token present=', !!(result?.token || result?.tokens?.token));
             // Store the verifier for the OAuth code exchange after redirect
             if (result?.verifier) {
                 localStorage.setItem('convex_auth_verifier', result.verifier);
@@ -124,9 +126,19 @@ import Layout from "../layouts/Layout.astro";
             if (result?.redirect) {
                 window.location.href = result.redirect;
             } else if (result?.tokens?.token) {
-                localStorage.setItem('convex_auth_token', result.tokens.token);
-                convex.setAuth(() => Promise.resolve(result.tokens.token));
-                window.location.href = '/dashboard';
+                    try {
+                        localStorage.setItem('convex_auth_token', result.tokens.token);
+                        console.debug('Login: wrote token to localStorage (google), verify=', !!localStorage.getItem('convex_auth_token'));
+                    } catch (e) {
+                        console.warn('Login: could not write token to localStorage (google)', e);
+                    }
+                    try {
+                        await convex.setAuth(() => Promise.resolve(result.tokens.token));
+                        console.debug('Login: convex.setAuth applied (google)');
+                    } catch (e) {
+                        console.warn('Login: convex.setAuth failed (google)', e);
+                    }
+                    window.location.href = '/dashboard';
             }
         } catch (error: any) {
             console.error('Google sign-in error:', error);
@@ -156,18 +168,60 @@ import Layout from "../layouts/Layout.astro";
                 provider: 'password',
                 params: { email, password, flow: 'signIn' }
             });
-            
-            console.log('Sign in result:', result);
-            
-            // Store auth token if returned (check various possible structures)
-            const token = result?.token || result?.tokens?.token;
-            if (token) {
-                localStorage.setItem('convex_auth_token', token);
-                convex.setAuth(() => Promise.resolve(token));
-            }
-            
-            // Redirect to dashboard on success
-            window.location.href = '/dashboard';
+                console.debug('Login: password signIn result keys=', result ? Object.keys(result) : null);
+                console.debug('Login: password token present=', !!(result?.token || result?.tokens?.token));
+
+                // Store auth token if returned (check various possible structures)
+                const token = result?.token || result?.tokens?.token;
+                if (token) {
+                    try {
+                        localStorage.setItem('convex_auth_token', token);
+                        console.debug('Login: wrote token to localStorage (password), verify=', !!localStorage.getItem('convex_auth_token'));
+                    } catch (e) {
+                        console.warn('Login: could not write token to localStorage (password)', e);
+                    }
+                    try {
+                        await convex.setAuth(() => Promise.resolve(token));
+                        console.debug('Login: convex.setAuth applied (password)');
+                    } catch (e) {
+                        console.warn('Login: convex.setAuth failed (password)', e);
+                    }
+                    // Redirect to dashboard on success
+                    console.debug('Login: token present, redirecting to /dashboard');
+                    window.location.href = '/dashboard';
+                    return;
+                }
+
+                // If server requested a redirect (e.g., to verify email), follow it
+                if (result?.redirect) {
+                    console.debug('Login: server returned redirect=', result.redirect);
+                    window.location.href = result.redirect;
+                    return;
+                }
+
+                // No token and no redirect — show server message if present
+                const serverMessage = result?.message || result?.error || null;
+                if (serverMessage) {
+                    errorMessage.textContent = serverMessage;
+                    errorMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign In';
+                    return;
+                }
+
+                // Default fallback — redirect to verification page with email prefilled
+                try {
+                    const verifyUrl = '/verify-email?email=' + encodeURIComponent(email || '');
+                    console.debug('Login: redirecting to verification page', verifyUrl);
+                    window.location.href = verifyUrl;
+                    return;
+                } catch (e) {
+                    console.warn('Login: failed to redirect to verify page', e);
+                    errorMessage.textContent = 'Check your email for a verification link or contact support.';
+                    errorMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign In';
+                }
         } catch (error: any) {
             console.error('Login error:', error);
             let message = 'Invalid email or password. Please try again.';

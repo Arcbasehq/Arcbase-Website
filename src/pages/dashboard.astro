@@ -308,11 +308,28 @@ import Layout from "../layouts/Layout.astro";
     async function loadDashboard() {
         try {
             convex = await waitForConvex();
-            
+
+            // Try to restore auth from localStorage and apply to Convex client
+            try {
+                const storedToken = localStorage.getItem('convex_auth_token');
+                console.debug('Dashboard: stored token present=', !!storedToken);
+                if (storedToken) {
+                    try {
+                        await convex.setAuth(() => Promise.resolve(storedToken));
+                        console.debug('Dashboard: convex.setAuth applied');
+                    } catch (e) {
+                        console.warn('Dashboard: convex.setAuth failed', e);
+                    }
+                }
+            } catch (e) {
+                console.warn('Dashboard: could not access localStorage', e);
+            }
+
             // Check authentication
             currentUser = await convex.query(api.users.current);
             
             if (!currentUser) {
+                console.debug('Dashboard: currentUser not found — redirecting to /login');
                 window.location.href = '/login';
                 return;
             }

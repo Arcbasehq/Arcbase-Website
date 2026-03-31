@@ -19,7 +19,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 	<!-- HERO -->
 	<section class="hero">
 		<div class="hero-bg">
-			<canvas id="heroCanvas"></canvas>
+			<canvas id="heroCanvas" aria-hidden="true" role="presentation"></canvas>
 		</div>
 		<div class="section-container">
 			<div class="hero-content fade-up">
@@ -64,7 +64,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 			<a href="https://focushub.tech" target="_blank" rel="noopener" class="sponsor-ad-card">
 				<div class="ad-badge">Ad</div>
 				<div class="ad-content-wrapper">
-					<img src="/focushub.png" alt="FocusHub Logo" class="sponsor-logo" />
+					<img src="/focushub.png" alt="FocusHub Logo" class="sponsor-logo" loading="lazy" decoding="async" />
 					<div class="ad-text-container">
 						<span class="ad-title">FocusHub</span>
 						<span class="sponsor-text">The ultimate productivity suite.</span>
@@ -199,7 +199,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 					class="project-card card-dark fade-up"
 				>
 					<div class="project-card-bg"></div>
-					<img src="/arcos.png" alt="ArcOS Logo" style="width: 60px; height: 60px;"/>
+					<img src="/arcos.png" alt="ArcOS Logo" style="width: 60px; height: 60px;" loading="lazy" decoding="async" />
 					<div class="project-card-content">
 						<h3>ArcOS</h3>
 						<p>Optimized Windows. Designed for enthusiasts.</p>
@@ -210,7 +210,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 					class="project-card card-dark fade-up"
 				>
 					<div class="project-card-bg"></div>
-					<img src="/book.svg" alt="OpenShelf Logo" style="width: 60px; height: 60px;"/>
+					<img src="/book.svg" alt="OpenShelf Logo" style="width: 60px; height: 60px;" loading="lazy" decoding="async" />
 					<div class="project-card-content">
 						<h3>OpenShelf</h3>
 						<p>Free and open source library.</p>
@@ -221,7 +221,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 					class="project-card card-dark fade-up"
 				>
 					<div class="project-card-bg"></div>
-					<img src="/security.svg" alt="ArcSecurity Logo" style="width: 60px; height: 60px;"/>
+					<img src="/security.svg" alt="ArcSecurity Logo" style="width: 60px; height: 60px;" loading="lazy" decoding="async" />
 					<div class="project-card-content">
 						<h3>ArcSecurity</h3>
 						<p>Free and open source OSINT tools.</p>
@@ -322,55 +322,58 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 	<NewsletterSignup />
 
 	<script>
-		const canvas = document.getElementById(
-			"heroCanvas",
-		) as HTMLCanvasElement;
-		if (canvas) {
-			const ctx = canvas.getContext("2d")!;
-			let particles: any[] = [];
+		(function () {
+			// Narrow DOM types with runtime checks so TS understands them
+			const canvasEl = document.getElementById("heroCanvas");
+			if (!(canvasEl instanceof HTMLCanvasElement)) return;
+			const canvas = canvasEl;
+			const ctx = canvas.getContext("2d");
+			if (!ctx) return;
+			let particles = [];
 
 			function resizeCanvas() {
-				canvas.width = canvas.parentElement!.offsetWidth;
-				canvas.height = canvas.parentElement!.offsetHeight;
+				const parent = canvas.parentElement;
+				if (parent instanceof HTMLElement) {
+					canvas.width = parent.offsetWidth;
+					canvas.height = parent.offsetHeight;
+				} else {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+				}
 			}
 
-			class Particle {
-				x: number;
-				y: number;
-				vx: number;
-				vy: number;
-				radius: number;
-				opacity: number;
-				constructor() {
-					this.x = 0;
-					this.y = 0;
-					this.vx = 0;
-					this.vy = 0;
-					this.radius = 0;
-					this.opacity = 0;
-					this.reset();
-				}
-				reset() {
-					this.x = Math.random() * canvas.width;
-					this.y = Math.random() * canvas.height;
-					this.vx = (Math.random() - 0.5) * 0.5;
-					this.vy = (Math.random() - 0.5) * 0.5;
-					this.radius = Math.random() * 2 + 0.5;
-					this.opacity = Math.random() * 0.5 + 0.1;
-				}
-				update() {
-					this.x += this.vx;
-					this.y += this.vy;
-					if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-					if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-				}
-				draw() {
-					ctx.beginPath();
-					ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-					ctx.fillStyle = `rgba(124, 58, 237, ${this.opacity})`;
-					ctx.fill();
-				}
+			function Particle() {
+				this.x = 0;
+				this.y = 0;
+				this.vx = 0;
+				this.vy = 0;
+				this.radius = 0;
+				this.opacity = 0;
+				this.reset();
 			}
+
+			Particle.prototype.reset = function () {
+				this.x = Math.random() * canvas.width;
+				this.y = Math.random() * canvas.height;
+				this.vx = (Math.random() - 0.5) * 0.5;
+				this.vy = (Math.random() - 0.5) * 0.5;
+				this.radius = Math.random() * 2 + 0.5;
+				this.opacity = Math.random() * 0.5 + 0.1;
+			};
+
+			Particle.prototype.update = function () {
+				this.x += this.vx;
+				this.y += this.vy;
+				if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+				if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+			};
+
+			Particle.prototype.draw = function () {
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+				ctx.fillStyle = 'rgba(124, 58, 237, ' + this.opacity + ')';
+				ctx.fill();
+			};
 
 			function initParticles() {
 				const count = Math.min(
@@ -393,7 +396,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 							ctx.beginPath();
 							ctx.moveTo(particles[i].x, particles[i].y);
 							ctx.lineTo(particles[j].x, particles[j].y);
-							ctx.strokeStyle = `rgba(124, 58, 237, ${opacity})`;
+							ctx.strokeStyle = 'rgba(124, 58, 237, ' + opacity + ')';
 							ctx.lineWidth = 0.5;
 							ctx.stroke();
 						}
@@ -403,7 +406,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 
 			function animate() {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				particles.forEach((p) => {
+				particles.forEach(function (p) {
 					p.update();
 					p.draw();
 				});
@@ -411,31 +414,30 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
 				requestAnimationFrame(animate);
 			}
 
-			window.addEventListener("resize", () => {
+			window.addEventListener("resize", function () {
 				resizeCanvas();
 				initParticles();
 			});
 			resizeCanvas();
 			initParticles();
 			animate();
-		}
+		})();
 
-		// Form handling
-		document
-			.getElementById("contactForm")
-			?.addEventListener("submit", (e) => {
+		// Form handling (vanilla JS) with proper element type checks
+		const contactFormEl = document.getElementById("contactForm");
+		if (contactFormEl instanceof HTMLFormElement) {
+			contactFormEl.addEventListener("submit", function (e) {
 				e.preventDefault();
-				const btn = (e.target as HTMLFormElement).querySelector(
-					".form-submit",
-				) as HTMLButtonElement;
+				const btn = contactFormEl.querySelector(".form-submit");
+				if (!(btn instanceof HTMLButtonElement)) return;
 				btn.textContent = "Message Sent!";
-				btn.style.background =
-					"linear-gradient(135deg, #059669, #047857)";
-				setTimeout(() => {
+				btn.style.background = "linear-gradient(135deg, #059669, #047857)";
+				setTimeout(function () {
 					btn.textContent = "Send Message";
 					btn.style.background = "";
-					(e.target as HTMLFormElement).reset();
+					contactFormEl.reset();
 				}, 3000);
 			});
+		}
 	</script>
 </Layout>
