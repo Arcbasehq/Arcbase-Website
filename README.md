@@ -6,27 +6,24 @@ arcbase is a collection of open-source projects focused on developer tools, clou
 
 ## Projects
 
-- **CrimiRepo**: The community-driven package repository for everyone.
-- **Forge**: Developer tools that accelerate your workflow.
-- **Nexus**: Cloud infrastructure that just works.
-- **Sentinel**: Open source security for the modern web.
+- **ArcOS**: Desktop experience for everyone.
+- **Sentinel**: Advanced security toolkit for the modern web.
+- **Arc Manager**: Modern local file management.
+- **Mobile App**: Arcbase on the go.
+- **OpenShelf**: The open-source digital library.
 
 ## Development
 
-This website is built with [Astro](https://astro.build/) and [Supabase](https://supabase.com/) for authentication and data storage.
+This website is built with [Astro](https://astro.build/) for lightning-fast delivery, [Supabase](https://supabase.com/) for authentication and PostgreSQL data storage, and [Datadog](https://www.datadoghq.com/) for Real User Monitoring.
 
-### Authentication Setup
+### Setup Instructions
 
-This site includes user authentication with GitHub and Google OAuth. To set up authentication:
-
-1. Follow the [Supabase Setup Guide](./SUPABASE_SETUP.md) for detailed instructions
+1. Follow the [Supabase Setup Guide](./SUPABASE_SETUP.md) for database and RLS instructions.
 2. Install dependencies: `npm install`
-3. Configure OAuth apps (see setup guide)
-4. Set environment variables in `.env.local`
+3. Configure your environment variables in `.env.local` with your Supabase API keys and Datadog RUM application token.
+4. Run the local dev server: `npm run dev`
 
 ### Commands
-
-All commands are run from the root of the project:
 
 | Command             | Action                                      |
 | :------------------ | :------------------------------------------ |
@@ -38,11 +35,11 @@ All commands are run from the root of the project:
 
 ### Features
 
-- **User Authentication**: Sign in with GitHub or Google
-- **User Profiles**: Manage your account information
-- **Project Starring**: Star your favorite projects
-- **Dark Mode**: Professional dark theme with toggle
-- **Responsive Design**: Mobile-first design with modern aesthetics
+- **Robust Authentication**: Email magic links and Google OAuth via Supabase Auth.
+- **Row Level Security**: Fully secured user profiles and metrics queried directly from the frontend.
+- **Real User Monitoring**: Embedded Datadog browser RUM to continuously trace performance.
+- **Automated Synthetic Testing**: E2E testing automatically triggered via GitHub Actions CI pipeline.
+- **Theme Support**: Seamless Dark/Light mode professional UI.
 
 ## Contributing
 
