@@ -54,44 +54,43 @@
 
         if (!email) return;
 
+        // Save original styles/text
+        const originalText = btn.innerHTML;
+        
         btn.disabled = true;
         btn.innerHTML = `Subscribing...`;
 
         try {
-            const { error } = await supabase.from('newsletter_subscriptions').insert({ email });
-            // Ignore unique constraint errors silently in UI but log them
-            if (error && error.code !== '23505') { 
-                throw error;
+            const { subscribeToNewsletter } = await import("../lib/actions");
+            const result = await subscribeToNewsletter(email);
+            
+            if (result.alreadySubscribed) {
+                btn.innerHTML = `Already Subscribed! ✓`;
+            } else {
+                btn.innerHTML = `Thanks for joining! ✓`;
             }
 
-            btn.innerHTML = `Subscribed! ✓`;
             btn.style.background = "linear-gradient(135deg, #059669, #047857)";
             btn.style.borderColor = "#059669";
             emailInput.value = "";
 
             setTimeout(() => {
-                btn.innerHTML = `
-                    Subscribe
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                `;
+                btn.innerHTML = originalText;
+                btn.style.background = "";
+                btn.style.borderColor = "";
+                btn.disabled = false;
+            }, 4000);
+        } catch (error: any) {
+            console.error("Newsletter subscribe error:", error);
+            btn.innerHTML = `Error, try again`;
+            btn.style.background = "#dc2626";
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
                 btn.style.background = "";
                 btn.style.borderColor = "";
                 btn.disabled = false;
             }, 3000);
-        } catch (error: any) {
-            console.error("Newsletter subscribe error:", error);
-            btn.innerHTML = `Try again`;
-            btn.disabled = false;
-            setTimeout(() => {
-                btn.innerHTML = `
-                    Subscribe
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                `;
-            }, 2000);
         }
     });
 </script>

@@ -99,32 +99,49 @@ const siteUrl = "https://arcbase.one";
     <script>
       import { supabase } from "../lib/supabase";
     </script>
-    
+
     <!-- Datadog RUM -->
     <script>
-      import { datadogRum } from '@datadog/browser-rum';
+      import { datadogRum } from "@datadog/browser-rum";
 
       // Initialize Datadog RUM in a client-side block so it runs exactly once upon load
       const applicationId = import.meta.env.PUBLIC_DATADOG_APPLICATION_ID;
       const clientToken = import.meta.env.PUBLIC_DATADOG_CLIENT_TOKEN;
-      const site = import.meta.env.PUBLIC_DATADOG_SITE || 'datadoghq.com';
+      const site = import.meta.env.PUBLIC_DATADOG_SITE || "datadoghq.com";
 
       if (applicationId && clientToken) {
-          datadogRum.init({
-              applicationId,
-              clientToken,
-              site,
-              service: 'arcbase-website',
-              env: import.meta.env.MODE || 'development',
-              version: '1.0.0', 
-              sessionSampleRate: 100,
-              sessionReplaySampleRate: 20,
-              trackUserInteractions: true,
-              trackResources: true,
-              trackLongTasks: true,
-              defaultPrivacyLevel: 'mask-user-input',
-          });
+        datadogRum.init({
+          applicationId,
+          clientToken,
+          site,
+          service: "arcbase-website",
+          env: import.meta.env.MODE || "development",
+          version: "1.0.0",
+          sessionSampleRate: 100,
+          sessionReplaySampleRate: 20,
+          trackUserInteractions: true,
+          trackResources: true,
+          trackLongTasks: true,
+          defaultPrivacyLevel: "mask-user-input",
+        });
       }
+    </script>
+
+    <!-- Honeybadger Error Tracking -->
+    <script>
+      import Honeybadger from "@honeybadger-io/js";
+
+      const hbApiKey =
+        import.meta.env.PUBLIC_HONEYBADGER_API_KEY ||
+        "hbp_FwRZUjfJcTc8MEll74xepjWihW4tWb22BkNk";
+
+      Honeybadger.configure({
+        apiKey: hbApiKey,
+        environment: import.meta.env.MODE || "production",
+      });
+
+      // Verify integration (one-time test)
+      // Honeybadger.notify("Testing Honeybadger!");
     </script>
   </head>
 

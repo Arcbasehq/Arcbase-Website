@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import NewsletterSignup from "../components/NewsletterSignup.astro";
+import HeroCanvas from "../components/HeroCanvas.astro";
 ---
 
 <Layout
   title="arcbase — Empowering Everyone to Change Their World"
-  description="arcbase is empowering everyone to change their world, by bringing open source software to the masses. Explore our open source projects in Linux, developer tools, and web services."
+  description="Arcbase brings open source software to the masses. Explore our projects in Linux, developer tools, and web services."
   keywords="arcbase, open source, linux, software, community, developer tools, web services"
   activePage="home"
 >
@@ -74,7 +75,6 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
       <div class="scroll-line"></div>
     </div>
   </section>
-
   <!-- ABOUT -->
   <section class="section about-section" id="about">
     <div class="section-container">
@@ -83,14 +83,20 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
         <div class="about-text fade-up">
           <h2 class="section-title">Who are we?</h2>
           <p class="section-desc">
-            Many things! We're a team, a movement, and a community. Together, we
-            have a shared mission of bringing open source software to the mass
-            market — the everyday person. We work towards this goal by building
-            software, products, communities, and coalitions.
+            Arcbase is more than just a typical software studio. We're a team, a
+            movement, and a global community of enthusiasts. Together, we have a
+            shared mission of bringing high-quality open source software to the
+            everyday person. We work towards this goal by building
+            professional-grade software, products, communities, and coalitions
+            that challenge the existing tech status quo.
           </p>
           <p class="section-desc" style="margin-top: 1rem;">
-            Our current focus is in the developer tools and web services space,
-            but we take on any endeavor that furthers our goals.
+            Our current focus is in the developer tools, kernel-level
+            optimizations, and web services space. We take on any endeavor that
+            furthers our goals of digital sovereignty and user empowerment. By
+            removing the barriers to entry, we're making it possible for anyone,
+            regardless of technical background, to <b>build</b> their digital life
+            on a foundation they actually own.
           </p>
 
           <div class="faq-section" style="margin-top: 2rem;">
@@ -111,10 +117,11 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
               </summary>
               <div class="faq-answer">
                 <p>
-                  Nope! We don't play in walled gardens. We're all about open
-                  ecosystems like Android and Linux. No closed source companies
-                  allowed. Freedom isn't just a buzzword for us, it's the whole
-                  vibe.
+                  No. We don't play in walled gardens or proprietary ecosystems
+                  that restrict user freedom. We're exclusively focused on open
+                  ecosystems like Android and Linux. In our view, software
+                  should be transparent and accountable to the person using it,
+                  not the corporation selling it.
                 </p>
               </div>
             </details>
@@ -125,7 +132,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
             class="about-link"
             style="margin-top: 1.5rem; display: inline-flex;"
           >
-            See what we build <span class="arrow">→</span>
+            See our journey <span class="arrow">→</span>
           </a>
         </div>
         <div class="about-visual fade-up">
@@ -154,10 +161,97 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
     </div>
   </section>
 
+  <!-- PRINCIPLES (NEW SECTION FOR SEO) -->
+  <section class="section principles-section">
+    <div class="section-container">
+      <div class="section-number fade-up">01</div>
+      <h2 class="section-title fade-up">Our Principles</h2>
+      <p
+        class="section-desc fade-up"
+        style="max-width: 600px; margin-bottom: 3rem;"
+      >
+        Everything we <b>build</b> and <b>ship</b> is guided by a core philosophy
+        of simplicity and ownership. We believe that when you understand your tools
+        with
+        <b>clarity</b>, you gain the <b>confidence</b> to innovate without fear.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-card fade-up">
+          <div class="principle-icon">
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3>Built for Clarity</h3>
+          <p>
+            We eliminate "black box" engineering. By keeping our source code
+            open and our documentation accessible, we provide users with the
+            <b>clarity</b> needed to audit their own security and privacy.
+          </p>
+        </div>
+
+        <div class="principle-card fade-up">
+          <div class="principle-icon">
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Shipped with Confidence</h3>
+          <p>
+            You should never have to wonder if an update will break your
+            workflow. We rigorously test every tool we <b>ship</b>, ensuring you
+            can move fast with <b>confidence</b>.
+          </p>
+        </div>
+
+        <div class="principle-card fade-up">
+          <div class="principle-icon">
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3>Community Owned</h3>
+          <p>
+            Arcbase is a coalition of developers and enthusiasts. Our roadmaps
+            are shaped by the community, not by corporate boardrooms or
+            advertising bottom lines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section class="section projects-section" id="projects">
     <div class="section-container">
-      <div class="section-number fade-up">01</div>
+      <div class="section-number fade-up">02</div>
       <div class="projects-header fade-up">
         <div>
           <h2 class="section-title">What do we do?</h2>
@@ -175,7 +269,12 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           <div class="project-card-bg"></div>
           <div class="project-card-content">
             <h3>Sentinel</h3>
-            <p>Open source security tools for the modern web.</p>
+            <p>
+              A comprehensive suite of open source security tools designed for
+              the modern web. Sentinel provides automated auditing, dependency
+              tracking, and real-time vulnerability scanning to ensure your
+              digital infrastructure remains resilient.
+            </p>
           </div>
         </a>
         <a href="/projects/app" class="project-card card-green fade-up">
@@ -183,7 +282,12 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           <span class="dev-badge">Android Only</span>
           <div class="project-card-content">
             <h3>Arcbase Learning</h3>
-            <p>Master coding on the go. Exclusively for Android.</p>
+            <p>
+              Master coding and system engineering on the go. This interactive
+              learning playground features a community-driven curriculum focused
+              on the Linux ecosystem, Rust, and low-level
+              development—exclusively for Android.
+            </p>
           </div>
         </a>
         <a href="/projects/manager" class="project-card card-green fade-up">
@@ -191,8 +295,10 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           <div class="project-card-content">
             <h3>Arcbase Manager</h3>
             <p>
-              A unified Linux package manager frontend bringing pacman, apt,
-              dnf, and AUR together under one consistent interface.
+              The ultimate Linux package manager frontend. Arcbase Manager
+              brings pacman, apt, dnf, and the AUR together under one
+              consistent, professional interface, simplifying complex system
+              maintenance for every user.
             </p>
           </div>
         </a>
@@ -202,9 +308,10 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           <div class="project-card-content">
             <h3>Arcbase Analysis AI</h3>
             <p>
-              AI powered system analysis and intelligent insights for
-              performance, security, and optimization across your Linux
-              environment.
+              A privacy-first, local-only AI that analyzes your system logs to
+              provide intelligent insights. Optimize performance, harden
+              security, and <b>build</b> a more efficient Linux environment with automated,
+              non-intrusive diagnostics.
             </p>
           </div>
         </a>
@@ -219,7 +326,12 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           />
           <div class="project-card-content">
             <h3>ArcOS</h3>
-            <p>Optimized Windows. Designed for enthusiasts.</p>
+            <p>
+              A professional Windows configuration framework. ArcOS provides a
+              reproducible, deterministic way to <b>ship</b> a performance-focused
+              system profile, ensuring <b>clarity</b> and <b>confidence</b> in your
+              OS setup.
+            </p>
           </div>
         </a>
         <a href="/projects/book" class="project-card card-dark fade-up">
@@ -233,7 +345,12 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           />
           <div class="project-card-content">
             <h3>OpenShelf</h3>
-            <p>Free and open source library.</p>
+            <p>
+              The privacy-focused community library. OpenSelf is a free and open
+              source cataloging tool that empowers users to manage their digital
+              collections with <b>clarity</b>, without the weight of proprietary
+              trackers.
+            </p>
           </div>
         </a>
         <a href="/projects/security" class="project-card card-dark fade-up">
@@ -247,9 +364,43 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
           />
           <div class="project-card-content">
             <h3>ArcSecurity</h3>
-            <p>Free and open source OSINT tools.</p>
+            <p>
+              Advanced OSINT and footprint analysis tools. ArcSecurity provides
+              the tools for professionals to <b>build</b> a safer digital identity
+              through transparent, community-vetted security research and automation.
+            </p>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION SECTION (NEW FOR SEO) -->
+  <section class="section mission-section">
+    <div class="section-container">
+      <div class="section-number fade-up">03</div>
+      <div class="mission-content fade-up">
+        <h2 class="section-title">The Open Source Mission</h2>
+        <p class="section-desc" style="max-width: 800px;">
+          For too long, the digital world has been divided into walled gardens
+          and proprietary "black boxes." We believe that true technological
+          progress is only possible when the foundation is open, transparent,
+          and owned by everyone. This isn't just about code—it's about the
+          <b>confidence</b> of knowing exactly what your devices are doing.
+        </p>
+        <p class="section-desc" style="max-width: 800px; margin-top: 1.5rem;">
+          Our focus on the Linux and Android ecosystems stems from a simple core
+          belief: users should have the <b>clarity</b> to audit, modify, and improve
+          the tools they use every day. Whether we're developing kernel performance
+          tuning scripts or building high-level package managers, we <b>build</b
+          > everything with the community at the forefront.
+        </p>
+        <p class="section-desc" style="max-width: 800px; margin-top: 1.5rem;">
+          When we <b>ship</b> a new project, we aren't just releasing software; we're
+          contributing to a global coalition that values digital sovereignty over
+          data harvesting. Join us as we continue to push the boundaries of what's
+          possible in the open source space.
+        </p>
       </div>
     </div>
   </section>
@@ -257,7 +408,7 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
   <!-- CONTACT -->
   <section class="section contact-section" id="contact">
     <div class="section-container">
-      <div class="section-number fade-up">02</div>
+      <div class="section-number fade-up">04</div>
       <div class="contact-grid">
         <div class="contact-info fade-up">
           <h2 class="section-title">Questions?</h2>
@@ -339,132 +490,112 @@ import NewsletterSignup from "../components/NewsletterSignup.astro";
   <NewsletterSignup />
 
   <script>
-    (function () {
-      // Narrow DOM types with runtime checks so TS understands them
-      const canvasEl = document.getElementById("heroCanvas");
-      if (!(canvasEl instanceof HTMLCanvasElement)) return;
-      const canvas = canvasEl;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      function resizeCanvas() {
-        const parent = canvas.parentElement;
-        if (parent instanceof HTMLElement) {
-          canvas.width = parent.offsetWidth;
-          canvas.height = parent.offsetHeight;
-        } else {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-      }
-
-      class Particle {
-        x: number = 0;
-        y: number = 0;
-        vx: number = 0;
-        vy: number = 0;
-        radius: number = 0;
-        opacity: number = 0;
-
-        constructor() {
-          this.reset();
-        }
-
-        reset() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.vx = (Math.random() - 0.5) * 0.5;
-          this.vy = (Math.random() - 0.5) * 0.5;
-          this.radius = Math.random() * 2 + 0.5;
-          this.opacity = Math.random() * 0.5 + 0.1;
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        }
-
-        draw() {
-          if (!ctx) return;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(124, 58, 237, ${this.opacity})`;
-          ctx.fill();
-        }
-      }
-
-      let particles: Particle[] = [];
-
-      function initParticles() {
-        const count = Math.min(
-          Math.floor((canvas.width * canvas.height) / 8000),
-          120,
-        );
-        particles = [];
-        for (let i = 0; i < count; i++) {
-          particles.push(new Particle());
-        }
-      }
-
-      function drawLines() {
-        if (!ctx) return;
-        const maxDist = 150;
-        for (let i = 0; i < particles.length; i++) {
-          const p1 = particles[i];
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < maxDist) {
-              const opacity = (1 - dist / maxDist) * 0.15;
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(124, 58, 237, ${opacity})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-      }
-
-      function animate() {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach((p) => {
-          p.update();
-          p.draw();
-        });
-        drawLines();
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener("resize", () => {
-        resizeCanvas();
-        initParticles();
-      });
-      resizeCanvas();
-      initParticles();
-      animate();
-    })();
-
     // Form handling (vanilla JS) with proper element type checks
-    const contactFormEl = document.getElementById("contactForm");
-    if (contactFormEl instanceof HTMLFormElement) {
-      contactFormEl.addEventListener("submit", function (e) {
+    const contactFormEl = document.getElementById(
+      "contactForm",
+    ) as HTMLFormElement;
+    if (contactFormEl) {
+      contactFormEl.addEventListener("submit", async function (e) {
         e.preventDefault();
-        const btn = contactFormEl.querySelector(".form-submit");
-        if (!(btn instanceof HTMLButtonElement)) return;
-        btn.textContent = "Message Sent!";
-        btn.style.background = "linear-gradient(135deg, #059669, #047857)";
-        setTimeout(function () {
-          btn.textContent = "Send Message";
-          btn.style.background = "";
+        const btn = contactFormEl.querySelector(
+          ".form-submit",
+        ) as HTMLButtonElement;
+
+        // Get form data
+        const formData = new FormData(contactFormEl);
+        const email = formData.get("email") as string;
+        const subject = formData.get("subject") as string;
+        const message = formData.get("message") as string;
+
+        if (!email || !message) return;
+
+        // Visual feedback
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Sending...";
+
+        try {
+          const { submitContactForm } = await import("../lib/actions");
+          await submitContactForm({ email, subject, message });
+
+          // Success state
+          btn.textContent = "Message Sent!";
+          btn.style.background = "linear-gradient(135deg, #059669, #047857)";
           contactFormEl.reset();
-        }, 3000);
+
+          setTimeout(function () {
+            btn.textContent = originalText;
+            btn.style.background = "";
+            btn.disabled = false;
+          }, 3000);
+        } catch (error) {
+          console.error("Form submission failed:", error);
+          btn.textContent = "Error, try again";
+          btn.style.background = "#dc2626"; // red-600
+
+          setTimeout(function () {
+            btn.textContent = originalText;
+            btn.style.background = "";
+            btn.disabled = false;
+          }, 3000);
+        }
       });
     }
   </script>
+  <style>
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .principle-card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .principle-card:hover {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-5px);
+    }
+
+    .principle-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(59, 157, 255, 0.1);
+      color: var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .principle-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .principle-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .mission-section {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </Layout>
