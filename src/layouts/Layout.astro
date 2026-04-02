@@ -17,7 +17,7 @@ export interface Props {
 const {
   title,
   description,
-  canonicalUrl = Astro.url.href,
+  canonicalUrl = `https://arcbase.one${Astro.url.pathname}`,
   ogImage = "/logo.png",
   ogType = "website",
   keywords = "open source, linux, software, community, arcbase, developer tools",
