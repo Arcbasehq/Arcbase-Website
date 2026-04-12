@@ -9,8 +9,11 @@ export const prerender = false;
 // We intentionally use SUPABASE_SERVICE_ROLE_KEY (no PUBLIC_ prefix) so it
 // is never bundled into client-side JavaScript by Astro/Vite.
 function getSupabaseAdmin() {
-  const url = import.meta.env.SUPABASE_URL;
-  const key = import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
+  // process.env is the correct way to read runtime secrets in Vercel serverless
+  // functions. import.meta.env is replaced statically at build time by Vite and
+  // is not guaranteed to carry non-PUBLIC_ vars into the deployed function bundle.
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
     throw new Error(
