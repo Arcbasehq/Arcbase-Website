@@ -1155,10 +1155,15 @@ textarea:focus-visible {
   border-color: var(--border-strong);
 }
 
-.footer-socials svg {
+.footer-socials svg,
+.footer-socials img {
   width: 16px;
   height: 16px;
   fill: var(--text-secondary);
+}
+
+.footer-socials img {
+  object-fit: contain;
 }
 
 /* ===== ANIMATIONS ===== */

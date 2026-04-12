@@ -148,9 +148,9 @@ const siteUrl = "https://arcbase.one";
         <div class="announcement-banner alt">
             <div class="announcement-inner">
                 <span class="announcement-text">
-                    <strong>New:</strong> CryFox — A private, secure, and fast Firefox fork.
-                    <a href="/cryfox" class="announcement-link">Try it now →</a
-                    >
+                    <strong>New:</strong> CryFox — A private, secure, and fast Firefox
+                    fork.
+                    <a href="/cryfox" class="announcement-link">Try it now →</a>
                 </span>
             </div>
             <button class="announcement-close" aria-label="Close">×</button>
@@ -335,123 +335,136 @@ const siteUrl = "https://arcbase.one";
                             ></path></svg
                         >
                     </a>
+                    <a
+                        href="https://opencollective.com/arcbasehq"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="Open Collective"
+                        class="footer-social-icon"
+                    >
+                        <img src="/open.png" alt="Open Collective" />
+                    </a>
                 </div>
             </div>
+        </footer>
 
-            <script>
-                const navbar = document.getElementById("navbar");
-                window.addEventListener("scroll", () => {
-                    if (window.scrollY > 20) {
-                        navbar?.classList.add("scrolled");
-                    } else {
-                        navbar?.classList.remove("scrolled");
-                    }
+        <script>
+            const navbar = document.getElementById("navbar");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 20) {
+                    navbar?.classList.add("scrolled");
+                } else {
+                    navbar?.classList.remove("scrolled");
+                }
+            });
+
+            const mobileToggle = document.getElementById("mobileToggle");
+            const navLinks = document.getElementById("navLinks");
+
+            if (mobileToggle && navLinks) {
+                mobileToggle.addEventListener("click", () => {
+                    const active = navLinks.classList.toggle("active");
+                    mobileToggle.classList.toggle("active");
+                    mobileToggle.setAttribute(
+                        "aria-expanded",
+                        active ? "true" : "false",
+                    );
                 });
 
-                const mobileToggle = document.getElementById("mobileToggle");
-                const navLinks = document.getElementById("navLinks");
-
-                if (mobileToggle && navLinks) {
-                    mobileToggle.addEventListener("click", () => {
-                        const active = navLinks.classList.toggle("active");
-                        mobileToggle.classList.toggle("active");
-                        mobileToggle.setAttribute(
-                            "aria-expanded",
-                            active ? "true" : "false",
-                        );
+                navLinks.querySelectorAll("a").forEach((link) => {
+                    link.addEventListener("click", () => {
+                        navLinks.classList.remove("active");
+                        mobileToggle.classList.remove("active");
+                        mobileToggle.setAttribute("aria-expanded", "false");
                     });
+                });
+            }
 
-                    navLinks.querySelectorAll("a").forEach((link) => {
-                        link.addEventListener("click", () => {
-                            navLinks.classList.remove("active");
-                            mobileToggle.classList.remove("active");
-                            mobileToggle.setAttribute("aria-expanded", "false");
-                        });
+            const fadeElements = document.querySelectorAll(".fade-up");
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                        }
                     });
-                }
+                },
+                { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+            );
 
-                const fadeElements = document.querySelectorAll(".fade-up");
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("visible");
-                            }
-                        });
-                    },
-                    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+            fadeElements.forEach((el) => observer.observe(el));
+
+            const themeToggle = document.getElementById("themeToggle");
+            const html = document.documentElement;
+
+            const currentTheme = localStorage.getItem("theme") || "light";
+            html.setAttribute("data-theme", currentTheme);
+
+            if (themeToggle) {
+                themeToggle.setAttribute(
+                    "aria-pressed",
+                    currentTheme === "dark" ? "true" : "false",
                 );
+            }
 
-                fadeElements.forEach((el) => observer.observe(el));
-
-                const themeToggle = document.getElementById("themeToggle");
-                const html = document.documentElement;
-
-                const currentTheme = localStorage.getItem("theme") || "light";
-                html.setAttribute("data-theme", currentTheme);
-
+            themeToggle?.addEventListener("click", () => {
+                const theme =
+                    html.getAttribute("data-theme") === "light"
+                        ? "dark"
+                        : "light";
+                html.setAttribute("data-theme", theme);
+                localStorage.setItem("theme", theme);
                 if (themeToggle) {
                     themeToggle.setAttribute(
                         "aria-pressed",
-                        currentTheme === "dark" ? "true" : "false",
+                        theme === "dark" ? "true" : "false",
                     );
                 }
+            });
 
-                themeToggle?.addEventListener("click", () => {
-                    const theme =
-                        html.getAttribute("data-theme") === "light"
-                            ? "dark"
-                            : "light";
-                    html.setAttribute("data-theme", theme);
-                    localStorage.setItem("theme", theme);
-                    if (themeToggle) {
-                        themeToggle.setAttribute(
-                            "aria-pressed",
-                            theme === "dark" ? "true" : "false",
-                        );
+            // Close banner functionality
+            function updateLayout() {
+                const banners = document.querySelectorAll(
+                    ".announcement-banner",
+                );
+                const navbar = document.getElementById("navbar");
+                const body = document.body;
+
+                let visibleCount = 0;
+                banners.forEach((banner) => {
+                    if (banner.style.display !== "none") {
+                        visibleCount++;
                     }
                 });
 
-                // Close banner functionality
-                function updateLayout() {
-                    const banners = document.querySelectorAll('.announcement-banner');
-                    const navbar = document.getElementById('navbar');
-                    const body = document.body;
-                    
-                    let visibleCount = 0;
-                    banners.forEach((banner) => {
-                        if (banner.style.display !== 'none') {
-                            visibleCount++;
-                        }
-                    });
-                    
-                    // Calculate new offset
-                    const offset = visibleCount * 34;
-                    
-                    // Update navbar position
-                    if (navbar) {
-                        navbar.style.top = offset + 'px';
-                    }
-                    
-                    // Update body padding
-                    body.style.paddingTop = (offset + 60) + 'px';
+                // Calculate new offset
+                const offset = visibleCount * 34;
+
+                // Update navbar position
+                if (navbar) {
+                    navbar.style.top = offset + "px";
                 }
 
-                // Set initial states and add listeners
-                document.addEventListener('DOMContentLoaded', () => {
-                    updateLayout();
+                // Update body padding
+                body.style.paddingTop = offset + 60 + "px";
+            }
 
-                    document.querySelectorAll('.announcement-close').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const banner = btn.closest('.announcement-banner');
+            // Set initial states and add listeners
+            document.addEventListener("DOMContentLoaded", () => {
+                updateLayout();
+
+                document
+                    .querySelectorAll(".announcement-close")
+                    .forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            const banner = btn.closest(".announcement-banner");
                             if (banner) {
-                                banner.style.display = 'none';
+                                banner.style.display = "none";
                                 updateLayout();
                             }
                         });
                     });
-                });
-            </script>
-        </footer>
+            });
+        </script>
     </body>
 </html>
