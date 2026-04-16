@@ -35,3 +35,4 @@ fiscal-host-message.txt
 
 .env*
 .env.local
+.env

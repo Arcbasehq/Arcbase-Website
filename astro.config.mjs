@@ -10,6 +10,8 @@ export default defineConfig({
   // per-route server rendering by setting `export const prerender = false`
   // in any page or API route — equivalent to the old "hybrid" mode.
   output: "static",
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: false },
+  }),
   integrations: [sitemap()],
 });

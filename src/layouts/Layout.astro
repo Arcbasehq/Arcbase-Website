@@ -69,6 +69,12 @@ const siteUrl = "https://arcbase.one";
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+            rel="stylesheet"
+        />
 
         <script
             type="application/ld+json"
@@ -120,9 +126,7 @@ const siteUrl = "https://arcbase.one";
         <script>
             import Honeybadger from "@honeybadger-io/js";
 
-            const hbApiKey =
-                import.meta.env.PUBLIC_HONEYBADGER_API_KEY ||
-                "hbp_FwRZUjfJcTc8MEll74xepjWihW4tWb22BkNk";
+            const hbApiKey = import.meta.env.PUBLIC_HONEYBADGER_API_KEY;
 
             Honeybadger.configure({
                 apiKey: hbApiKey,
@@ -169,7 +173,7 @@ const siteUrl = "https://arcbase.one";
                     height="32"
                     width="32"
                 />
-                <span>Arcbase</span>
+                <span style="font-family: Google sans;">Arcbase</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li>
@@ -529,17 +533,6 @@ const siteUrl = "https://arcbase.one";
                         // silently ignore — static links remain as fallback
                     }
                 })();
-
-                // Fire-and-forget IP log.
-                // keepalive ensures the request completes even if the user
-                // navigates away immediately. Errors are intentionally swallowed
-                // so a failed analytics call can never break page rendering.
-                fetch("/api/log-ip", {
-                    method: "POST",
-                    keepalive: true,
-                }).catch(() => {
-                    // silently ignore
-                });
             });
         </script>
     </body>
