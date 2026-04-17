@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import StarButton from "../components/StarButton.astro";
 
 const projects = [
     {
@@ -148,46 +149,62 @@ const icons: Record<string, string> = {
             <div class="projects-grid">
                 {
                     projects.map((project, i) => (
-                        <a
-                            href={
-                                project.slug === "cryfox"
-                                    ? `/cryfox`
-                                    : `/projects/${project.slug}`
-                            }
+                        <div
                             class={`project-card fade-up ${project.featured ? "featured" : ""}`}
                         >
-                            <div class="project-icon">
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    width="24"
-                                    height="24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    set:html={icons[project.icon]}
+                            <a
+                                href={
+                                    project.slug === "cryfox"
+                                        ? `/cryfox`
+                                        : `/projects/${project.slug}`
+                                }
+                                class="project-card-body"
+                            >
+                                <div class="project-icon">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        set:html={icons[project.icon]}
+                                    />
+                                </div>
+                                <div class="project-header">
+                                    <h3>{project.name}</h3>
+                                    {project.inDev && (
+                                        <span class="dev-badge">
+                                            In Development
+                                        </span>
+                                    )}
+                                    {project.featured && (
+                                        <span class="featured-badge">
+                                            Featured
+                                        </span>
+                                    )}
+                                </div>
+                                <p class="project-tagline">{project.tagline}</p>
+                                <p class="project-desc">
+                                    {project.description}
+                                </p>
+                                <ul class="project-features">
+                                    {project.features
+                                        .slice(0, 3)
+                                        .map((feature) => (
+                                            <li>{feature}</li>
+                                        ))}
+                                </ul>
+                            </a>
+                            <div class="project-card-footer">
+                                <StarButton
+                                    projectId={project.slug}
+                                    projectName={project.name}
                                 />
                             </div>
-                            <div class="project-header">
-                                <h3>{project.name}</h3>
-                                {project.inDev && (
-                                    <span class="dev-badge">
-                                        In Development
-                                    </span>
-                                )}
-                                {project.featured && (
-                                    <span class="featured-badge">Featured</span>
-                                )}
-                            </div>
-                            <p class="project-tagline">{project.tagline}</p>
-                            <p class="project-desc">{project.description}</p>
-                            <ul class="project-features">
-                                {project.features.slice(0, 3).map((feature) => (
-                                    <li>{feature}</li>
-                                ))}
-                            </ul>
-                        </a>
+                        </div>
                     ))
                 }
             </div>
@@ -261,6 +278,22 @@ const icons: Record<string, string> = {
         border-radius: var(--radius-lg);
         padding: 28px;
         transition: all 0.2s ease;
+    }
+
+    .project-card-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .project-card-footer {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
     }
 
     .project-card:hover {

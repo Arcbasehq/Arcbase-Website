@@ -11,7 +11,14 @@ import Layout from "../layouts/Layout.astro";
         <div class="verify-container">
             <div class="verify-card">
                 <div class="verify-icon">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <svg
+                        width="64"
+                        height="64"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    >
                         <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                         <path d="M22 4L12 13L2 4"></path>
                     </svg>
@@ -19,35 +26,24 @@ import Layout from "../layouts/Layout.astro";
 
                 <div class="verify-header">
                     <h1>Check your email</h1>
-                    <p id="verifyDescription">We sent a verification code to your email address. Enter it below to verify your account.</p>
+                    <p id="verifyDescription">
+                        We sent a verification link to your email address. Click
+                        on it to verify your account.
+                    </p>
                 </div>
 
-                <div class="email-display" id="emailDisplay" style="display: none;">
+                <div
+                    class="email-display"
+                    id="emailDisplay"
+                    style="display: none;"
+                >
                     <span id="emailText"></span>
                 </div>
-
-                <form class="verify-form" id="verifyForm">
-                    <div class="code-inputs" id="codeInputs">
-                        <input type="text" maxlength="1" class="code-digit" data-index="0" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code" />
-                        <input type="text" maxlength="1" class="code-digit" data-index="1" inputmode="numeric" pattern="[0-9]" />
-                        <input type="text" maxlength="1" class="code-digit" data-index="2" inputmode="numeric" pattern="[0-9]" />
-                        <input type="text" maxlength="1" class="code-digit" data-index="3" inputmode="numeric" pattern="[0-9]" />
-                        <input type="text" maxlength="1" class="code-digit" data-index="4" inputmode="numeric" pattern="[0-9]" />
-                        <input type="text" maxlength="1" class="code-digit" data-index="5" inputmode="numeric" pattern="[0-9]" />
-                    </div>
-
-                    <div id="errorMessage" class="error-message" style="display: none;"></div>
-                    <div id="successMessage" class="success-message" style="display: none;"></div>
-
-                    <button type="submit" class="btn-primary btn-block" id="verifyBtn" disabled>
-                        Verify Email
-                    </button>
-                </form>
-
                 <div class="resend-section">
-                    <p>Didn't receive the code?</p>
-                    <button class="resend-btn" id="resendBtn">Resend Code</button>
-                    <span id="resendTimer" class="resend-timer" style="display: none;"></span>
+                    <span
+                        id="resendTimer"
+                        class="resend-timer"
+                        style="display: none;"></span>
                 </div>
 
                 <div class="verify-footer">
@@ -61,21 +57,30 @@ import Layout from "../layouts/Layout.astro";
 <script>
     import { supabase } from "../lib/supabase";
 
-    const codeInputs = document.querySelectorAll<HTMLInputElement>('.code-digit');
-    const verifyBtn = document.getElementById('verifyBtn') as HTMLButtonElement;
-    const verifyForm = document.getElementById('verifyForm') as HTMLFormElement;
-    const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
-    const successMessage = document.getElementById('successMessage') as HTMLDivElement;
-    const resendBtn = document.getElementById('resendBtn') as HTMLButtonElement;
-    const resendTimer = document.getElementById('resendTimer') as HTMLSpanElement;
-    const emailDisplay = document.getElementById('emailDisplay') as HTMLDivElement;
-    const emailText = document.getElementById('emailText') as HTMLSpanElement;
+    const codeInputs =
+        document.querySelectorAll<HTMLInputElement>(".code-digit");
+    const verifyBtn = document.getElementById("verifyBtn") as HTMLButtonElement;
+    const verifyForm = document.getElementById("verifyForm") as HTMLFormElement;
+    const errorMessage = document.getElementById(
+        "errorMessage",
+    ) as HTMLDivElement;
+    const successMessage = document.getElementById(
+        "successMessage",
+    ) as HTMLDivElement;
+    const resendBtn = document.getElementById("resendBtn") as HTMLButtonElement;
+    const resendTimer = document.getElementById(
+        "resendTimer",
+    ) as HTMLSpanElement;
+    const emailDisplay = document.getElementById(
+        "emailDisplay",
+    ) as HTMLDivElement;
+    const emailText = document.getElementById("emailText") as HTMLSpanElement;
 
     // Get email from URL params
     const params = new URLSearchParams(window.location.search);
-    const email = params.get('email');
+    const email = params.get("email");
     if (email) {
-        emailDisplay.style.display = 'flex';
+        emailDisplay.style.display = "flex";
         emailText.textContent = email;
     }
 
@@ -84,9 +89,9 @@ import Layout from "../layouts/Layout.astro";
 
     // Handle code input behavior
     codeInputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
+        input.addEventListener("input", (e) => {
             const target = e.target as HTMLInputElement;
-            const value = target.value.replace(/[^0-9]/g, '');
+            const value = target.value.replace(/[^0-9]/g, "");
             target.value = value;
 
             if (value && index < codeInputs.length - 1) {
@@ -96,23 +101,27 @@ import Layout from "../layouts/Layout.astro";
             checkCodeComplete();
         });
 
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !input.value && index > 0) {
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !input.value && index > 0) {
                 codeInputs[index - 1].focus();
             }
         });
 
-        input.addEventListener('paste', (e) => {
+        input.addEventListener("paste", (e) => {
             e.preventDefault();
-            const pasted = e.clipboardData?.getData('text').replace(/[^0-9]/g, '') || '';
-            const digits = pasted.split('').slice(0, 6);
+            const pasted =
+                e.clipboardData?.getData("text").replace(/[^0-9]/g, "") || "";
+            const digits = pasted.split("").slice(0, 6);
             digits.forEach((digit, i) => {
                 if (codeInputs[i]) {
                     codeInputs[i].value = digit;
                 }
             });
             if (digits.length > 0) {
-                const focusIndex = Math.min(digits.length, codeInputs.length - 1);
+                const focusIndex = Math.min(
+                    digits.length,
+                    codeInputs.length - 1,
+                );
                 codeInputs[focusIndex].focus();
             }
             checkCodeComplete();
@@ -120,7 +129,9 @@ import Layout from "../layouts/Layout.astro";
     });
 
     function getCode(): string {
-        return Array.from(codeInputs).map(i => i.value).join('');
+        return Array.from(codeInputs)
+            .map((i) => i.value)
+            .join("");
     }
 
     function checkCodeComplete() {
@@ -129,14 +140,14 @@ import Layout from "../layouts/Layout.astro";
     }
 
     // Submit verification
-    verifyForm?.addEventListener('submit', async (e) => {
+    verifyForm?.addEventListener("submit", async (e) => {
         e.preventDefault();
         const code = getCode();
         if (code.length !== 6) return;
 
-        errorMessage.style.display = 'none';
+        errorMessage.style.display = "none";
         verifyBtn.disabled = true;
-        verifyBtn.textContent = 'Verifying...';
+        verifyBtn.textContent = "Verifying...";
 
         try {
             if (!email) throw new Error("Email address is missing.");
@@ -144,26 +155,28 @@ import Layout from "../layouts/Layout.astro";
             const { error } = await supabase.auth.verifyOtp({
                 email,
                 token: code,
-                type: 'signup'
+                type: "signup",
             });
 
             if (error) throw error;
 
-            successMessage.textContent = 'Email verified successfully! Redirecting...';
-            successMessage.style.display = 'block';
+            successMessage.textContent =
+                "Email verified successfully! Redirecting...";
+            successMessage.style.display = "block";
 
             setTimeout(() => {
-                window.location.href = '/dashboard';
+                window.location.href = "/dashboard";
             }, 1500);
         } catch (error: any) {
-            console.error('Verification error:', error);
-            errorMessage.textContent = error.message || 'Invalid verification code. Please try again.';
-            errorMessage.style.display = 'block';
+            console.error("Verification error:", error);
+            errorMessage.textContent =
+                error.message || "Invalid verification code. Please try again.";
+            errorMessage.style.display = "block";
             verifyBtn.disabled = false;
-            verifyBtn.textContent = 'Verify Email';
+            verifyBtn.textContent = "Verify Email";
 
             // Clear inputs
-            codeInputs.forEach(i => i.value = '');
+            codeInputs.forEach((i) => (i.value = ""));
             codeInputs[0]?.focus();
         }
     });
@@ -172,26 +185,26 @@ import Layout from "../layouts/Layout.astro";
     let cooldown = 0;
     let cooldownInterval: ReturnType<typeof setInterval>;
 
-    resendBtn?.addEventListener('click', async () => {
+    resendBtn?.addEventListener("click", async () => {
         if (cooldown > 0) return;
 
         resendBtn.disabled = true;
-        resendBtn.textContent = 'Sending...';
+        resendBtn.textContent = "Sending...";
 
         try {
             if (!email) throw new Error("Email address is missing.");
 
             const { error } = await supabase.auth.resend({
-                type: 'signup',
-                email
+                type: "signup",
+                email,
             });
 
             if (error) throw error;
 
             // Start cooldown
             cooldown = 60;
-            resendBtn.style.display = 'none';
-            resendTimer.style.display = 'inline';
+            resendBtn.style.display = "none";
+            resendTimer.style.display = "inline";
             resendTimer.textContent = `Resend in ${cooldown}s`;
 
             cooldownInterval = setInterval(() => {
@@ -199,18 +212,19 @@ import Layout from "../layouts/Layout.astro";
                 resendTimer.textContent = `Resend in ${cooldown}s`;
                 if (cooldown <= 0) {
                     clearInterval(cooldownInterval);
-                    resendBtn.style.display = 'inline';
+                    resendBtn.style.display = "inline";
                     resendBtn.disabled = false;
-                    resendBtn.textContent = 'Resend Code';
-                    resendTimer.style.display = 'none';
+                    resendBtn.textContent = "Resend Code";
+                    resendTimer.style.display = "none";
                 }
             }, 1000);
         } catch (error: any) {
-            console.error('Resend error:', error);
-            errorMessage.textContent = error.message || 'Failed to resend code. Please try again.';
-            errorMessage.style.display = 'block';
+            console.error("Resend error:", error);
+            errorMessage.textContent =
+                error.message || "Failed to resend code. Please try again.";
+            errorMessage.style.display = "block";
             resendBtn.disabled = false;
-            resendBtn.textContent = 'Resend Code';
+            resendBtn.textContent = "Resend Code";
         }
     });
 </script>
@@ -291,7 +305,7 @@ import Layout from "../layouts/Layout.astro";
         text-align: center;
         font-size: 1.5rem;
         font-weight: 700;
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
         background: var(--bg-primary);
         border: 2px solid var(--border);
         border-radius: var(--radius-md);

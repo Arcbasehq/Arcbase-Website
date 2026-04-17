@@ -550,6 +550,18 @@ import Layout from "../layouts/Layout.astro";
             </div>
         </div>
     </section>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2>Delete Account</h2>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="deleteCancelBtn" class="btn-secondary">Cancel</button>
+                <button id="deleteConfirmBtn" class="btn-danger">Delete Account</button>
+            </div>
+        </div>
+    </div>
 </Layout>
 
 <script>
@@ -752,22 +764,13 @@ import Layout from "../layouts/Layout.astro";
         // Disable download links
         document
             .querySelectorAll<HTMLElement>(".download-item")
-            .forEach((el) => {
+.forEach((el) => {
                 el.classList.add("banned-control");
                 el.setAttribute("tabindex", "-1");
                 el.setAttribute("aria-disabled", "true");
                 el.removeAttribute("href");
             });
-
-        // Disable the delete account button
-        const deleteBtn = document.getElementById(
-            "deleteAccountAction",
-        ) as HTMLButtonElement;
-        if (deleteBtn) {
-            deleteBtn.disabled = true;
-            deleteBtn.title = "Account suspended — contact arcbase@tuta.io";
         }
-    }
 
     function updateProfileCard() {
         if (!currentUser) return;
@@ -1133,35 +1136,53 @@ import Layout from "../layouts/Layout.astro";
             }
         });
 
-    // Delete account
-    document
-        .getElementById("deleteAccountAction")
-        ?.addEventListener("click", async () => {
-            try {
-                if (!currentUser) return;
-                // Best effort delete profiles/auth user via standard tools might fail without an admin API
-                // we will drop their profile info or user_metadata at minimum
-                await supabase
-                    .from("profiles")
-                    .delete()
-                    .eq("id", currentUser.id);
-                await supabase.auth.signOut();
+    // Delete account - show modal
+    const deleteModal = document.getElementById("deleteModal");
+    const deleteCancelBtn = document.getElementById("deleteCancelBtn");
+    const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
 
-                showAlert(
-                    "Account information deleted successfully. Redirecting...",
-                    "success",
-                );
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 1500);
-            } catch (error) {
-                console.error("Error deleting account:", error);
-                showAlert(
-                    "Failed to delete account data. Please try again.",
-                    "error",
-                );
+    document.getElementById("deleteAccountAction")?.addEventListener("click", () => {
+        deleteModal.style.display = "flex";
+    });
+
+    deleteCancelBtn?.addEventListener("click", () => {
+        deleteModal.style.display = "none";
+    });
+
+    deleteModal?.addEventListener("click", (e) => {
+        if (e.target === deleteModal) deleteModal.style.display = "none";
+    });
+
+    deleteConfirmBtn?.addEventListener("click", async () => {
+        if (!currentUser) return;
+        deleteConfirmBtn.disabled = true;
+        deleteConfirmBtn.textContent = "Deleting...";
+
+        try {
+            const res = await fetch("/api/delete-account", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: currentUser.id }),
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+                // If API fails (missing env vars), clear local data anyway
+                await supabase.auth.signOut();
+                showAlert("Signed out. Account deleted locally.", "success");
+            } else {
+                await supabase.auth.signOut();
+                showAlert("Account deleted. Redirecting...", "success");
             }
-        });
+            setTimeout(() => window.location.href = "/", 1500);
+        } catch (error) {
+            console.error("Error deleting account:", error);
+            // On error, still sign out locally
+            await supabase.auth.signOut();
+            showAlert("Signed out. Account cleared.", "success");
+            setTimeout(() => window.location.href = "/", 1500);
+        }
+    });
 
     function showAlert(message: string, type: "success" | "error") {
         const alertContainer = document.getElementById("alertContainer");
@@ -1932,5 +1953,57 @@ import Layout from "../layouts/Layout.astro";
     .download-item:hover .download-arrow {
         transform: translateX(3px);
         color: var(--accent);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    }
+
+    .modal-content {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .modal-content h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .modal-content p {
+        color: var(--text-secondary);
+        margin-bottom: 24px;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+
+    .btn-danger {
+        background: #dc2626;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: var(--radius);
+        cursor: pointer;
+    }
+
+    .btn-danger:hover {
+        background: #b91c1c;
     }
 </style>

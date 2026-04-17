@@ -1,43 +1,52 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import NewsletterSignup from "../components/NewsletterSignup.astro";
 
 const posts = [
     {
         title: "Introducing arcbase: Our Mission to Democratize Open Source",
         date: "March 5, 2026",
-        excerpt: "Today we're publicly sharing our vision: to bring open source software to the masses. Here's why we started arcbase, what we're building, and how you can be part of the movement.",
+        excerpt:
+            "Today we're publicly sharing our vision: to bring open source software to the masses. Here's why we started arcbase, what we're building, and how you can be part of the movement.",
         tag: "Announcement",
         slug: "#",
         featured: true,
+        readTime: "8 min read",
     },
     {
         title: "ArcOS 1.0 Beta: A Cleaner, Faster Windows Experience",
         date: "February 28, 2026",
-        excerpt: "ArcOS strips away the bloat from Windows 11, giving you a privacy-focused, performance-optimized OS designed for power users and enthusiasts.",
+        excerpt:
+            "ArcOS strips away the bloat from Windows 11, giving you a privacy-focused, performance-optimized OS designed for power users and enthusiasts.",
         tag: "Release",
         slug: "/projects/os",
+        readTime: "5 min read",
     },
     {
         title: "How Sentinel Keeps Your Code Safe — Automatically",
         date: "February 14, 2026",
-        excerpt: "Dependency vulnerabilities are one of the biggest threats to modern apps. Learn how Sentinel scans, audits, and monitors your projects so you don't have to.",
+        excerpt:
+            "Dependency vulnerabilities are one of the biggest threats to modern apps. Learn how Sentinel scans, audits, and monitors your projects so you don't have to.",
         tag: "Guide",
         slug: "/projects/sentinel",
+        readTime: "6 min read",
     },
     {
         title: "Contributor Spotlight: Building Arc Manager Together",
         date: "January 30, 2026",
-        excerpt: "Meet the contributors behind Arc Manager — the unified Linux package manager frontend. See how open source collaboration is shaping the future of package management.",
+        excerpt:
+            "Meet the contributors behind Arc Manager — the unified Linux package manager frontend. See how open source collaboration is shaping the future of package management.",
         tag: "Community",
         slug: "/projects/manager",
+        readTime: "4 min read",
     },
     {
         title: "2026 Roadmap: What's Next for arcbase",
         date: "January 15, 2026",
-        excerpt: "From Arcbase Learning to Analysis AI, here's a look at everything we're building this year and how our community is driving the direction.",
+        excerpt:
+            "From Arcbase Learning to Analysis AI, here's a look at everything we're building this year and how our community is driving the direction.",
         tag: "Roadmap",
         slug: "/about",
+        readTime: "7 min read",
     },
 ];
 ---
@@ -52,7 +61,9 @@ const posts = [
     <section class="page-hero">
         <div class="page-hero-content">
             <h1><span class="highlight">Blog</span></h1>
-            <p>News, updates, guides, and stories from the arcbase community.</p>
+            <p>
+                News, updates, guides, and stories from the arcbase community.
+            </p>
         </div>
     </section>
 
@@ -62,6 +73,7 @@ const posts = [
                 <div class="blog-card-meta">
                     <span class="blog-tag">{posts[0].tag}</span>
                     <span class="blog-date">{posts[0].date}</span>
+                    <span class="blog-read-time">{posts[0].readTime}</span>
                 </div>
                 <h2>{posts[0].title}</h2>
                 <p>{posts[0].excerpt}</p>
@@ -74,22 +86,27 @@ const posts = [
         <div class="section-container">
             <h2 class="section-title fade-up">Latest Posts</h2>
             <div class="blog-grid">
-                {posts.slice(1).map((post) => (
-                    <a href={post.slug} class="blog-card fade-up">
-                        <div class="blog-card-meta">
-                            <span class="blog-tag">{post.tag}</span>
-                            <span class="blog-date">{post.date}</span>
-                        </div>
-                        <h3>{post.title}</h3>
-                        <p>{post.excerpt}</p>
-                        <span class="about-link" style="margin-top: auto;">Read more →</span>
-                    </a>
-                ))}
+                {
+                    posts.slice(1).map((post) => (
+                        <a href={post.slug} class="blog-card fade-up">
+                            <div class="blog-card-meta">
+                                <span class="blog-tag">{post.tag}</span>
+                                <span class="blog-date">{post.date}</span>
+                                <span class="blog-read-time">
+                                    {post.readTime}
+                                </span>
+                            </div>
+                            <h3>{post.title}</h3>
+                            <p>{post.excerpt}</p>
+                            <span class="about-link" style="margin-top: auto;">
+                                Read more →
+                            </span>
+                        </a>
+                    ))
+                }
             </div>
         </div>
     </section>
-
-    <NewsletterSignup />
 
     <script
         type="application/ld+json"
@@ -97,9 +114,14 @@ const posts = [
             "@context": "https://schema.org",
             "@type": "Blog",
             name: "arcbase Blog",
-            description: "News, updates, guides, and community stories from arcbase.",
+            description:
+                "News, updates, guides, and community stories from arcbase.",
             url: "https://arcbase.one/blog",
-            publisher: { "@type": "Organization", name: "arcbase", url: "https://arcbase.one" },
+            publisher: {
+                "@type": "Organization",
+                name: "arcbase",
+                url: "https://arcbase.one",
+            },
         })}
     />
 </Layout>
@@ -191,8 +213,25 @@ const posts = [
         color: var(--text-tertiary);
     }
 
+    .blog-read-time {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .blog-read-time::before {
+        content: "·";
+        margin-right: 2px;
+    }
+
     @media (max-width: 768px) {
-        .blog-featured-card { padding: 24px; }
-        .blog-grid { grid-template-columns: 1fr; }
+        .blog-featured-card {
+            padding: 24px;
+        }
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

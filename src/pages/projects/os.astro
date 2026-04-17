@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import StarButton from "../../components/StarButton.astro";
 ---
 
 <Layout
@@ -14,26 +15,43 @@ import Layout from "../../layouts/Layout.astro";
         <div class="hero-glow glow-1"></div>
         <div class="hero-glow glow-2"></div>
 
-        <div class="page-hero-content fade-up" style="display: flex; align-items: center; gap: 3rem; text-align: left; max-width: 1100px; width: 100%;">
-            
+        <div
+            class="page-hero-content fade-up"
+            style="display: flex; align-items: center; gap: 3rem; text-align: left; max-width: 1100px; width: 100%;"
+        >
             <!-- Left -->
-            <div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 1.25rem;">
-                <img src="/arctext.png" alt="ArcOS" style="width: 200px; height: auto; display: block;"/>
+            <div
+                style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 1.25rem;"
+            >
+                <img
+                    src="/arctext.png"
+                    alt="ArcOS"
+                    style="width: 200px; height: auto; display: block;"
+                />
                 <p style="margin: 0; font-size: 1.1rem; opacity: 0.7;">
                     Deterministic Windows configuration. No custom ISO.
                 </p>
-                <a href="/assets/WallpaperKit.zip" class="btn-primary" style="align-self: flex-start;">
+                <a
+                    href="/assets/WallpaperKit.zip"
+                    class="btn-primary"
+                    style="align-self: flex-start;"
+                >
                     Wallpaper Kit
                 </a>
             </div>
 
             <!-- Right -->
-            <div class="arc-preview" style="flex: 1 1 0; min-width: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 24px 60px rgba(0,0,0,0.5);">
-                <img src="/wallpaper.png" alt="ArcOS Preview" style="width: 100%; height: auto; display: block;"/>
+            <div
+                class="arc-preview"
+                style="flex: 1 1 0; min-width: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 24px 60px rgba(0,0,0,0.5);"
+            >
+                <img
+                    src="/wallpaper.png"
+                    alt="ArcOS Preview"
+                    style="width: 100%; height: auto; display: block;"
+                />
             </div>
-
         </div>
-
     </section>
 
     <!-- OVERVIEW -->
@@ -45,21 +63,23 @@ import Layout from "../../layouts/Layout.astro";
                     <h2 class="section-title">What ArcOS Actually Is</h2>
 
                     <p class="section-desc">
-                        ArcOS is a Windows configuration framework — not a custom operating system.
-                        It applies a structured, reproducible set of configuration rules to a clean
+                        ArcOS is a Windows configuration framework — not a
+                        custom operating system. It applies a structured,
+                        reproducible set of configuration rules to a clean
                         Windows installation.
                     </p>
 
                     <p class="section-desc" style="margin-top: 1rem;">
-                        The project focuses on reducing unnecessary background services,
-                        removing consumer-facing features, and applying supported system
-                        policies in a controlled and reversible way.
+                        The project focuses on reducing unnecessary background
+                        services, removing consumer-facing features, and
+                        applying supported system policies in a controlled and
+                        reversible way.
                     </p>
 
                     <p class="section-desc" style="margin-top: 1rem;">
-                        ArcOS does not redistribute Windows, modify system binaries,
-                        or patch the kernel. It operates within supported configuration
-                        boundaries.
+                        ArcOS does not redistribute Windows, modify system
+                        binaries, or patch the kernel. It operates within
+                        supported configuration boundaries.
                     </p>
                 </div>
 
@@ -72,7 +92,8 @@ import Layout from "../../layouts/Layout.astro";
                             <span
                                 class="project-tag"
                                 style="color: #2563eb; background: rgba(37, 99, 235, 0.1);"
-                            >Windows Framework</span>
+                                >Windows Framework</span
+                            >
                             <h3 style="color: #fff;">ArcOS</h3>
                         </div>
 
@@ -102,44 +123,44 @@ import Layout from "../../layouts/Layout.astro";
             <h2 class="section-title fade-up">Architecture</h2>
 
             <p class="section-desc fade-up" style="margin-bottom: 3rem;">
-                ArcOS is built as a modular execution framework composed of isolated engines.
+                ArcOS is built as a modular execution framework composed of
+                isolated engines.
             </p>
 
             <div class="values-grid">
-
                 <div class="value-card fade-up">
                     <h3>Modular Engines</h3>
                     <p>
                         Services, scheduled tasks, AppX packages, policies,
-                        performance tuning, and UI configuration are handled
-                        by independent engines.
+                        performance tuning, and UI configuration are handled by
+                        independent engines.
                     </p>
                 </div>
 
                 <div class="value-card fade-up">
                     <h3>Manifest-Driven Execution</h3>
                     <p>
-                        Engine metadata defines risk level, compatibility,
-                        and reboot requirements. Playbooks determine execution order.
+                        Engine metadata defines risk level, compatibility, and
+                        reboot requirements. Playbooks determine execution
+                        order.
                     </p>
                 </div>
 
                 <div class="value-card fade-up">
                     <h3>Deterministic</h3>
                     <p>
-                        Configuration is idempotent and reproducible.
-                        Re-running ArcOS results in the same validated state.
+                        Configuration is idempotent and reproducible. Re-running
+                        ArcOS results in the same validated state.
                     </p>
                 </div>
 
                 <div class="value-card fade-up">
                     <h3>Reversible</h3>
                     <p>
-                        Restore points and state tracking are created prior
-                        to modification, enabling controlled rollback.
+                        Restore points and state tracking are created prior to
+                        modification, enabling controlled rollback.
                     </p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -150,7 +171,10 @@ import Layout from "../../layouts/Layout.astro";
             <div class="section-number">02</div>
             <h2 class="section-title">What ArcOS Does Not Do</h2>
 
-            <ul class="project-features" style="margin-top: 2rem; display: inline-block; text-align: left;">
+            <ul
+                class="project-features"
+                style="margin-top: 2rem; display: inline-block; text-align: left;"
+            >
                 <li>No custom Windows ISO</li>
                 <li>No kernel patching</li>
                 <li>No binary modification</li>
@@ -161,20 +185,28 @@ import Layout from "../../layouts/Layout.astro";
     </section>
 
     <!-- CTA -->
-    <section class="content-block" style="text-align: center; padding-bottom: 6rem;">
+    <section
+        class="content-block"
+        style="text-align: center; padding-bottom: 6rem;"
+    >
         <div class="content-container fade-up">
             <h2 class="section-title">Open Source & Transparent</h2>
             <p class="section-desc" style="margin: 0 auto 2rem;">
-                ArcOS is open source and available under the GNU GPL-3.0 license.
-                Review the engines, modify playbooks, or build your own profiles.
+                ArcOS is open source and available under the GNU GPL-3.0
+                license. Review the engines, modify playbooks, or build your own
+                profiles.
             </p>
 
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <div
+                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"
+            >
                 <a
                     href="https://github.com/arcbasehq/arcos"
                     target="_blank"
                     rel="noopener"
-                    class="btn-primary">View Source</a>
+                    class="btn-primary">View Source</a
+                >
+                <StarButton projectId="os" projectName="ArcOS" />
             </div>
         </div>
     </section>
@@ -191,7 +223,7 @@ import Layout from "../../layouts/Layout.astro";
             offers: {
                 "@type": "Offer",
                 price: "0",
-                priceCurrency: "USD"
+                priceCurrency: "USD",
             },
             description:
                 "ArcOS is a modular Windows configuration framework that applies a reproducible system profile without modifying or redistributing Windows.",
@@ -200,12 +232,12 @@ import Layout from "../../layouts/Layout.astro";
                 "Risk-tiered configuration",
                 "Windows build validation",
                 "Rollback tracking",
-                "Deployment reporting"
+                "Deployment reporting",
             ],
             author: {
                 "@type": "Organization",
-                name: "arcbase"
-            }
+                name: "arcbase",
+            },
         })}
     />
 </Layout>

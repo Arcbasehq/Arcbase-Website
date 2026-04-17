@@ -69,10 +69,12 @@ const siteUrl = "https://arcbase.one";
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
 
@@ -149,15 +151,83 @@ const siteUrl = "https://arcbase.one";
             </div>
             <button class="announcement-close" aria-label="Close">×</button>
         </div>
-        <div class="announcement-banner alt">
-            <div class="announcement-inner">
-                <span class="announcement-text">
-                    <strong>New:</strong> CryFox — A private, secure, and fast Firefox
-                    fork.
-                    <a href="/cryfox" class="announcement-link">Try it now →</a>
-                </span>
+
+        <div id="cookie-banner" class="cookie-banner" style="display: none;">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <h3>We use cookies</h3>
+                    <p>
+                        We use cookies to enhance your browsing experience and
+                        analyze our traffic. <a href="/cookies">Learn more</a>
+                    </p>
+                </div>
+                <div class="cookie-banner-buttons">
+                    <button id="cookie-manage" class="btn-cookie-link"
+                        >Manage options</button
+                    >
+                    <button id="cookie-reject" class="btn-cookie-secondary"
+                        >No thanks</button
+                    >
+                    <button id="cookie-accept" class="btn-cookie-primary"
+                        >Agree</button
+                    >
+                </div>
             </div>
-            <button class="announcement-close" aria-label="Close">×</button>
+        </div>
+
+        <div id="cookie-modal" class="cookie-modal" style="display: none;">
+            <div class="cookie-modal-backdrop"></div>
+            <div class="cookie-modal-content">
+                <div class="cookie-modal-header">
+                    <h2>Manage your privacy</h2>
+                    <button id="cookie-modal-close" class="cookie-modal-close"
+                        >×</button
+                    >
+                </div>
+                <div class="cookie-modal-body">
+                    <p>
+                        We use cookies to improve your experience and analyze
+                        site traffic. You can choose which cookies you want to
+                        accept.
+                    </p>
+
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Necessary cookies</h4>
+                            <p>
+                                Required for the site to work. Cannot be
+                                disabled.
+                            </p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" checked disabled />
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Analytics cookies</h4>
+                            <p>
+                                Help us understand how visitors interact with
+                                our website.
+                            </p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" id="cookie-analytics" />
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-modal-footer">
+                    <button id="cookie-cancel" class="btn-cookie-link"
+                        >Cancel</button
+                    >
+                    <button id="cookie-save" class="btn-cookie-primary"
+                        >Save my preferences</button
+                    >
+                </div>
+            </div>
         </div>
 
         <nav
@@ -176,6 +246,31 @@ const siteUrl = "https://arcbase.one";
                 <span style="font-family: Google sans;">Arcbase</span>
             </a>
             <ul class="nav-links" id="navLinks">
+                <li class="nav-dropdown">
+                    <a href="/projects" class="nav-dropdown-trigger"
+                        >Projects <i class="fa-solid fa-chevron-down"></i></a
+                    >
+                    <div class="nav-dropdown-menu">
+                        <a href="/projects">All Projects</a>
+                        <a href="/projects/app">Arcbase Learning</a>
+                        <a href="/projects/manager">Arc Manager</a>
+                        <a href="/projects/os">ArcOS</a>
+                        <a href="/projects/book">OpenShelf</a>
+                        <a href="/projects/sentinel">Sentinel</a>
+                        <a href="/cryfox">CryFox</a>
+                    </div>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="/docs" class="nav-dropdown-trigger"
+                        >Resources <i class="fa-solid fa-chevron-down"></i></a
+                    >
+                    <div class="nav-dropdown-menu">
+                        <a href="/docs">Docs</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/roadmap">Roadmap</a>
+                        <a href="/android">Android</a>
+                    </div>
+                </li>
                 <li>
                     <a
                         href="/about"
@@ -184,29 +279,9 @@ const siteUrl = "https://arcbase.one";
                 </li>
                 <li>
                     <a
-                        href="/projects"
-                        class={activePage === "projects" ? "active" : ""}
-                        >Projects</a
-                    >
-                </li>
-                <li>
-                    <a
                         href="/contact"
                         class={activePage === "contact" ? "active" : ""}
                         >Contact</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/blog"
-                        class={activePage === "blog" ? "active" : ""}>Blog</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/android"
-                        class={activePage === "android" ? "active" : ""}
-                        >Android</a
                     >
                 </li>
                 <li>
@@ -280,7 +355,7 @@ const siteUrl = "https://arcbase.one";
             </div>
         </nav>
 
-        <main id="main" tabindex="-1">
+        <main id="main">
             <slot />
         </main>
 
@@ -290,15 +365,29 @@ const siteUrl = "https://arcbase.one";
                     <a href="/" class="nav-brand">
                         <img
                             src="/logo.png"
-                            alt="arcbase"
-                            style="height: 32px;"
-                            loading="lazy"
+                            alt="arcbase Logo"
+                            height="32"
+                            width="32"
                         />
-                        <span>Arcbase</span>
+                        <span style="font-family: Google sans;">Arcbase</span>
                     </a>
                     <p>
                         Empowering everyone to change their world, by bringing
                         open source software to the masses.
+                    </p>
+                    <form class="footer-newsletter" id="footerNewsletter">
+                        <input
+                            type="email"
+                            placeholder="Your email"
+                            id="footerNewsletterEmail"
+                            required
+                        />
+                        <button type="submit"
+                            ><i class="fa-solid fa-arrow-right"></i></button
+                        >
+                    </form>
+                    <p class="footer-newsletter-hint">
+                        Get updates on our latest projects.
                     </p>
                 </div>
                 <div class="footer-col">
@@ -319,6 +408,7 @@ const siteUrl = "https://arcbase.one";
                     >
                     <a href="/docs">Docs</a>
                     <a href="/blog">Blog</a>
+                    <a href="/roadmap">Roadmap</a>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
@@ -332,7 +422,14 @@ const siteUrl = "https://arcbase.one";
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Arcbase. All rights reserved.</p>
+                <p>
+                    © {new Date().getFullYear()} Arcbase. All rights reserved.
+                </p>
+                <div class="footer-legal">
+                    <a href="/terms">Terms</a>
+                    <a href="/privacy">Privacy</a>
+                    <a href="/cookies">Cookies</a>
+                </div>
                 <div class="footer-socials">
                     <a
                         href="https://github.com/arcbasehq"
@@ -361,13 +458,17 @@ const siteUrl = "https://arcbase.one";
 
         <script>
             const navbar = document.getElementById("navbar");
-            window.addEventListener("scroll", () => {
-                if (window.scrollY > 20) {
-                    navbar?.classList.add("scrolled");
-                } else {
-                    navbar?.classList.remove("scrolled");
-                }
-            });
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (window.scrollY > 60) {
+                        navbar?.classList.add("scrolled");
+                    } else {
+                        navbar?.classList.remove("scrolled");
+                    }
+                },
+                { passive: true },
+            );
 
             const mobileToggle = document.getElementById("mobileToggle");
             const navLinks = document.getElementById("navLinks");
@@ -533,6 +634,131 @@ const siteUrl = "https://arcbase.one";
                         // silently ignore — static links remain as fallback
                     }
                 })();
+
+                // Cookie banner logic
+                const cookieBanner = document.getElementById("cookie-banner");
+                const cookieModal = document.getElementById("cookie-modal");
+                const cookieManage = document.getElementById("cookie-manage");
+                const cookieModalClose =
+                    document.getElementById("cookie-modal-close");
+                const cookieAccept = document.getElementById("cookie-accept");
+                const cookieReject = document.getElementById("cookie-reject");
+                const cookieSave = document.getElementById("cookie-save");
+                const cookieAnalytics =
+                    document.getElementById("cookie-analytics");
+
+                function getCookie(name) {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2)
+                        return parts.pop().split(";").shift();
+                    return null;
+                }
+
+                function setCookie(name, value, days = 365) {
+                    const expires = new Date();
+                    expires.setTime(
+                        expires.getTime() + days * 24 * 60 * 60 * 1000,
+                    );
+                    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+                }
+
+                function showCookieBanner() {
+                    if (cookieBanner) cookieBanner.style.display = "block";
+                }
+
+                function hideCookieBanner() {
+                    if (cookieBanner) cookieBanner.style.display = "none";
+                }
+
+                function showCookieModal() {
+                    if (cookieModal) cookieModal.style.display = "flex";
+                }
+
+                function hideCookieModal() {
+                    if (cookieModal) cookieModal.style.display = "none";
+                }
+
+                function applyCookiePreferences(analytics) {
+                    if (analytics) {
+                        // Enable analytics
+                    } else {
+                        // Disable analytics
+                    }
+                }
+
+                // Check if user has made a choice
+                const cookieConsent = getCookie("cookie_consent");
+                if (!cookieConsent) {
+                    showCookieBanner();
+                }
+
+                // Event listeners
+                cookieManage?.addEventListener("click", () => {
+                    hideCookieBanner();
+                    showCookieModal();
+                });
+
+                cookieModalClose?.addEventListener("click", () => {
+                    hideCookieModal();
+                    showCookieBanner();
+                });
+                document
+                    .querySelector(".cookie-modal-backdrop")
+                    ?.addEventListener("click", () => {
+                        hideCookieModal();
+                        showCookieBanner();
+                    });
+
+                cookieAccept?.addEventListener("click", () => {
+                    setCookie("cookie_consent", "accepted", 365);
+                    setCookie("cookie_analytics", "true", 365);
+                    applyCookiePreferences(true);
+                    hideCookieBanner();
+                });
+
+                cookieReject?.addEventListener("click", () => {
+                    setCookie("cookie_consent", "rejected", 365);
+                    setCookie("cookie_analytics", "false", 365);
+                    applyCookiePreferences(false);
+                    hideCookieBanner();
+                });
+
+                cookieSave?.addEventListener("click", () => {
+                    const analytics = cookieAnalytics?.checked || false;
+                    setCookie("cookie_consent", "custom", 365);
+                    setCookie(
+                        "cookie_analytics",
+                        analytics ? "true" : "false",
+                        365,
+                    );
+                    applyCookiePreferences(analytics);
+                    hideCookieModal();
+                });
+
+                // Cancel button
+                const cookieCancel = document.getElementById("cookie-cancel");
+                cookieCancel?.addEventListener("click", () => {
+                    hideCookieModal();
+                    showCookieBanner();
+                });
+
+                // Footer newsletter
+                const footerForm = document.getElementById("footerNewsletter");
+                footerForm?.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const email = (
+                        document.getElementById(
+                            "footerNewsletterEmail",
+                        ) as HTMLInputElement
+                    )?.value;
+                    if (!email) return;
+                    const btn = footerForm.querySelector("button");
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    }
+                });
             });
         </script>
     </body>

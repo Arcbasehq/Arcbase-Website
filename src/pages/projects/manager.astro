@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import StarButton from "../../components/StarButton.astro";
 ---
 
 <Layout
@@ -16,11 +17,11 @@ import Layout from "../../layouts/Layout.astro";
         <div class="page-hero-content fade-up">
             <h1><span class="highlight">Arc Manager</span></h1>
             <p>Unified Linux package management across distributions.</p>
-            <br>
-            <a href="https://github.com/arcbasehq/ArcManager/releases/download/Release/arc-1.1.0.tar.gz">
-                <button class="btn-primary">
-                    Download Now
-                </button>
+            <br />
+            <a
+                href="https://github.com/arcbasehq/ArcManager/releases/download/Release/arc-1.1.0.tar.gz"
+            >
+                <button class="btn-primary"> Download Now </button>
             </a>
         </div>
     </section>
@@ -89,9 +90,16 @@ import Layout from "../../layouts/Layout.astro";
             <div class="values-grid">
                 <div class="value-card fade-up">
                     <div class="value-icon purple">
-                        <svg viewBox="0 0 24 24" width="20" height="20"
-                             fill="none" stroke="currentColor" stroke-width="2"
-                             stroke-linecap="round" stroke-linejoin="round">
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
                             <path d="M3 12h18"></path>
                             <path d="M12 3v18"></path>
                         </svg>
@@ -105,8 +113,14 @@ import Layout from "../../layouts/Layout.astro";
 
                 <div class="value-card fade-up">
                     <div class="value-icon blue">
-                        <svg viewBox="0 0 24 24" width="20" height="20"
-                             fill="none" stroke="currentColor" stroke-width="2">
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
                             <path d="M12 20V10"></path>
                             <path d="M18 20V4"></path>
                             <path d="M6 20v-6"></path>
@@ -121,9 +135,16 @@ import Layout from "../../layouts/Layout.astro";
 
                 <div class="value-card fade-up">
                     <div class="value-icon green">
-                        <svg viewBox="0 0 24 24" width="20" height="20"
-                             fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2l7 4v6c0 5-7 10-7 10S5 17 5 12V6l7-4z"></path>
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M12 2l7 4v6c0 5-7 10-7 10S5 17 5 12V6l7-4z"
+                            ></path>
                         </svg>
                     </div>
                     <h3>AUR Support</h3>
@@ -136,8 +157,14 @@ import Layout from "../../layouts/Layout.astro";
 
                 <div class="value-card fade-up">
                     <div class="value-icon pink">
-                        <svg viewBox="0 0 24 24" width="20" height="20"
-                             fill="none" stroke="currentColor" stroke-width="2">
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M12 6v6l4 2"></path>
                         </svg>
@@ -153,21 +180,27 @@ import Layout from "../../layouts/Layout.astro";
     </section>
 
     <!-- CTA -->
-    <section class="content-block"
-             style="text-align: center; padding-bottom: 6rem;">
+    <section
+        class="content-block"
+        style="text-align: center; padding-bottom: 6rem;"
+    >
         <div class="content-container fade-up">
             <h2 class="section-title">Simplify your workflow</h2>
             <p class="section-desc" style="margin: 0 auto 2rem;">
-                Arc Manager is open source and community-driven.
-                Contribute, improve, and help standardize Linux tooling.
+                Arc Manager is open source and community-driven. Contribute,
+                improve, and help standardize Linux tooling.
             </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="https://github.com/arcbasehq/arcmanager"
-                   target="_blank"
-                   rel="noopener"
-                   class="btn-primary">View on GitHub</a>
-                <a href="/projects"
-                   class="btn-secondary">All Projects</a>
+            <div
+                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; align-items: center;"
+            >
+                <a
+                    href="https://github.com/arcbasehq/arcmanager"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-primary">View on GitHub</a
+                >
+                <a href="/projects" class="btn-secondary">All Projects</a>
+                <StarButton projectId="manager" projectName="Arc Manager" />
             </div>
         </div>
     </section>
@@ -184,7 +217,7 @@ import Layout from "../../layouts/Layout.astro";
             offers: {
                 "@type": "Offer",
                 price: "0",
-                priceCurrency: "USD"
+                priceCurrency: "USD",
             },
             description:
                 "Arc Manager is a unified Linux package manager frontend supporting pacman, apt, dnf, and AUR helpers under one consistent CLI.",
@@ -192,12 +225,12 @@ import Layout from "../../layouts/Layout.astro";
                 "Cross-distribution support",
                 "Automatic backend detection",
                 "AUR fallback support",
-                "Dry-run mode"
+                "Dry-run mode",
             ],
             author: {
                 "@type": "Organization",
-                name: "arcbase"
-            }
+                name: "arcbase",
+            },
         })}
     />
 </Layout>

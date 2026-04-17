@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import StarButton from "../../components/StarButton.astro";
 ---
 
 <Layout
@@ -201,11 +202,8 @@ import Layout from "../../layouts/Layout.astro";
                     rel="noopener"
                     class="btn-primary">View on GitHub</a
                 >
-                <a
-                    href="/projects"
-                    class="btn-secondary"
-                    >All Projects</a
-                >
+                <a href="/projects" class="btn-secondary">All Projects</a>
+                <StarButton projectId="security" projectName="ArcOSINT" />
             </div>
         </div>
     </section>
